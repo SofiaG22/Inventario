@@ -25,7 +25,7 @@
         <input type="submit" name="submitSignUp">
 
         <?php
-        include("Auth/signUp.php")
+        include("../Auth/signUp.php")
         ?>
     </form>
 </body>

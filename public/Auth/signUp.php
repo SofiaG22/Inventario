@@ -1,5 +1,5 @@
 <?php
-include("conexion/conexion.php");
+include("../conexion/conexion.php");
 if(isset($_POST['submitSignUp'])){
 
     if(!empty($_POST['nameSign']) && !empty($_POST['chargeSign']) && !empty($_POST['emailSign'])  && !empty($_POST['passwordSign']) && !empty($_POST['idStoreSign']) ){

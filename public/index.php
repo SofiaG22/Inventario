@@ -3,10 +3,10 @@
 session_start();
 
 if(!isset($_SESSION['user'])){
-    include("indexnoAuth.php");
+    include("template/indexnoAuth.php");
 }
 
 else{
-    include("indexAuth.php");
+    include("template/indexAuth.php");
 }
 ?>

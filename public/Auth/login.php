@@ -21,7 +21,7 @@
                   icon: 'error',
                   title: 'Usuario o contraseña equivocada',
                   text: 'prueba de nuevo',
-                  footer:'No tienes cuenta ?<a href=formSignUp.php>Registrate</a>'
+                  footer:'No tienes cuenta ?<a href=template/formSignUp.php>Registrate</a>'
                 });
                    </script>";
                 }
