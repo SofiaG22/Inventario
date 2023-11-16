@@ -1,3 +1,7 @@
+<?php
+include("../validateSession/validaten.php")
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

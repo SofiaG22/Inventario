@@ -1,6 +1,3 @@
-<?php
-echo "Bienvenido". $_SESSION['user'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +9,11 @@ echo "Bienvenido". $_SESSION['user'];
 <body>
     <form action="" method="post">
 
-        <input type="submit" name="closeSession"></input>
+        <input type="submit" name="closeSession" value="Cerrar sesión"></input>
     </form>
 <?php
-include("Auth/logOut.php");
+include('navbar.php')
 ?>
-
+<li>ventas</li>
 </body>
 </html>

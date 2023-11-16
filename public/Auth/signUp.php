@@ -18,7 +18,7 @@ if(isset($_POST['submitSignUp'])){
                   icon: 'error',
                   title: 'Usuario ya registrado',
                   text: 'prueba de nuevo',
-                  footer:'<a href=index.php>Ir a inicio</a>'
+                  footer:'<a href=../index.php>Ir a inicio</a>'
                 });
                    </script>";
 
@@ -31,7 +31,7 @@ if(isset($_POST['submitSignUp'])){
                     Swal.fire({
                   icon: 'success',
                   title: 'Usuario registrado con exito',
-                  footer:'<a href=index.php>Ir a inicio</a>'
+                  footer:'<a href=../index.php>Ir a inicio</a>'
                 });
                    </script>";
 
