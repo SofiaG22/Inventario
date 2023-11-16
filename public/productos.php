@@ -4,18 +4,11 @@
 <?php
 include('validateSession/validate.php');
 include('template/navbar.php');
-include('clases/producto.php');
-$pr= new Producto();
-$pr->Saludar();
+
 ?>
 <h1>Añadir productos</h1>
-<h2>Ver productos</h2>
-<<<<<<< HEAD
-<form action=""></form>
 
-<script src="js/addProduct.js"></script>
-=======
-<form action="">
+<form action="" method="post">
     <label for="">Nombre</label>
     <input type="text" name="nameProduct">
     <label for="">Codigo</label>
@@ -24,6 +17,13 @@ $pr->Saludar();
     <input type="text" name="descripcionProduct">
     <label for="">Precio</label>
     <input type="number" name="priceProduct">
-    <input type="submit">
+    <label for="">Cantidad</label>
+    <input type="number" name="quantityProduct">
+    <input type="submit" name="submitProduct">
+    <?php
+
+include('handlers/producthandler.php');
+?>
+<h2>Ver productos</h2>
 </form>
->>>>>>> 96aa238ee9af16dfadfde77c7b36c14945b47984
+<script src="js/addProduct.js"></script>
