@@ -33,16 +33,15 @@ if(isset($_POST['submitSignUp'])){
                   title: 'Usuario registrado con exito',
                   footer:'<a href=../index.php>Ir a inicio</a>'
                 });
-                   </script>";
-
-                
+                   </script>";    
             }
             else{
                 echo "<script>
                     Swal.fire({
                 icon: 'error',
                 title: 'a ocurrido un error',
-                text: 'no se encontro el id de tienda o hay un error en la conexion'
+                text: 'no se encontro el id de tienda o hay un error en la conexion',
+                footer:'no tienes una tienda? <a href=tiendaForm.php>Creala</a>'
             });
                </script>";
             }
@@ -51,6 +50,7 @@ if(isset($_POST['submitSignUp'])){
     }
     else{
         echo "completa los campos";
+
     }
 }
 ?>
