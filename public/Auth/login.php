@@ -3,9 +3,10 @@
        
         if(isset($_POST["submitLogin"])){
             $email= trim($_POST["emailLogin"]);
-            $password= md5($_POST["passwordLogin"]);
-
-            if(strlen($email)>=5 && strlen($password)>=5){
+            $password=$_POST["passwordLogin"];
+            
+            if(strlen($email)>=6 && strlen($password)>=8){
+                $password= md5($_POST["passwordLogin"]);
                 $query=("SELECT * FROM administrador WHERE usuario ='$email' and contraseña='$password'");
                 $result =mysqli_query($conex,$query);
                 if (mysqli_num_rows($result)>0){
@@ -18,6 +19,10 @@
                 }
                 else{
                     echo "<script>
+                   //mantener email; 
+                let email= document.getElementById('emailLogin');
+                email.value=`{$_POST['emailLogin']}`
+
                     Swal.fire({
                   icon: 'error',
                   title: 'Usuario o contraseña equivocada',
@@ -29,6 +34,17 @@
             }else
             {
                
+               echo "<script>
+               let email= document.getElementById('emailLogin');
+               email.value=`{$_POST['emailLogin']}`
+             
+               Swal.fire({
+                icon: 'error',
+                title: 'Completa los campos',
+                text: 'La contraseña debe tener 8 caracteres',
+              });
+              </script>";
+              
             }   
         }   
 ?>

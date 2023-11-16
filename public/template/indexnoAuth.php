@@ -8,9 +8,10 @@
 </head>
 
 <body>
-    <form action="" method="post">
-        <input type="email" name="emailLogin">
-        <input type="password" name="passwordLogin">
+    <h1>Iniciar sesion</h1>
+    <form action="" method="post" >
+        <input type="email"  id="emailLogin" name="emailLogin">
+        <input type="password" id="passwordLogin" name="passwordLogin">
         <input type="submit" name="submitLogin" onclick="(e)=>{e.preventDefault()}">
 
     <?php
@@ -18,8 +19,9 @@
     ?>
     </form>
     
-   
-        
+   <a href="template/tiendaForm.php">Crear tienda</a>
+   <a href="template/formSignUp.php">Crear Cuenta</a>
+
 </body>
 
 </html>

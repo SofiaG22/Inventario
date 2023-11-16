@@ -1,5 +1,5 @@
 <?php
-include("../validateSession/validaten.php")
+include("../validateSession/validatenTemplate.php")
 
 ?>
 <!DOCTYPE html>
@@ -11,18 +11,19 @@ include("../validateSession/validaten.php")
     <title>Document</title>
 </head>
 <body>
+    <h1>Añadir Admin</h1>
     <form action="" method="post">
         <label for="">nombre</label>
-        <input type="text" name="nameSign">
+        <input type="text" id="nameSign"name="nameSign">
 
         <label for="">cargo</label>
-        <input type="text" name="chargeSign">
+        <input type="text" id="chargeSign"name="chargeSign">
         <label for="">email</label>
-        <input type="email" name="emailSign">
+        <input type="email" id="emailSign" name="emailSign">
         <label for="">contraseña</label>
-        <input type="password" name="passwordSign">
+        <input type="password" id="passwordSign" name="passwordSign">
         <label for="">id tienda</label>
-        <input type="number" name="idStoreSign">
+        <input type="number" id="idStoreSign" name="idStoreSign">
 
 
 
@@ -32,5 +33,7 @@ include("../validateSession/validaten.php")
         include("../Auth/signUp.php")
         ?>
     </form>
+    <a href="tiendaForm.php">Crear tienda</a>
+   <a href="../index.php">Iniciar sesion</a>
 </body>
 </html>

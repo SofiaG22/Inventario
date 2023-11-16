@@ -21,13 +21,12 @@ class Producto{
     }
 
     // Otros métodos de la clase
-    public function addProduct($conex) {
+    public function setProduct($conex) {
         $query=("SELECT * FROM administrador");
         $result =mysqli_query($conex,$query);
         if (mysqli_num_rows($result)>0){
            echo "este metodo funciona";
         }
- 
     
 }
 
