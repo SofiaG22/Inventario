@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Formulario producto -->
+    <form action="./clases/registroProducto.php" method="post">
+        <p>Nombre producto :<input type="text" name="nombre_producto"></p>
+        <p>Valor de venta:<input type="text" name="valor_venta"></p>
+        <p>Cantidad: <input type="text" name="producto_cantidad"></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+    
+     <!-- Formulario registro -->
+    <form action="./clases/registroAdmin.php" method="post">
+        <p>Número de documento: <input type="text" name="num_documento"></p>
+        <p>Nombre y Apellido: <input type="text" name="adm_nombre"></p>
+        <p>Cargo: <input type="text" name="adm_cargo"></p>
+        <p>Usuario:<input type="text" name="adm_usuario"></p>
+        <p>Contraseña:<input type="text" name="adm_contrasena"></p>
+        <p>Código Tienda: <input type="text" name="tienda_codigo"></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+    
+
+        <!-- Formulario cliente -->
+    <form action="./clases/registroCliente.php" method="post">
+        <p>Número de documento<input type="text" name="cli_documento"></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+        <!-- Formulario proveedor -->
+
+    <form action="./clases/registroProveedor.php" method="post">
+        <p>Nombre proveedor:<input type="text" name="prov_nombre"></p>
+        <p>Número de telefono:<input type="text" name="prov_telefono"></p>
+        <p>Correo: <input type="text" name="prov_correo"></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+     <!-- Formulario tienda -->
+     <form action="./clases/registroTienda.php" method="post">
+        <p>Nombre tienda:<input type="text" name="tie_nombre"></p>
+        <p>Dirección:<input type="text" name="tie_direccion"></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+</body>
+</html>
