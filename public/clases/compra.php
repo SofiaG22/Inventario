@@ -1,11 +1,9 @@
 <?php
 class Compra{
-    private $id_compra;
     private $cant_compra ;
     private $precio_proveedor;
 
-    public function __construct($id_compra, $cant_compra, $precio_proveedor) {
-        $this->id_compra = $id_compra;
+    public function __construct($cant_compra, $precio_proveedor) {
         $this->cant_compra = $cant_compra;
         $this->precio_proveedor = $precio_proveedor;
     }

@@ -1,15 +1,15 @@
 <?php
 class Administrador{
-    private $id_admin;
     private $name_admin ;
     private $charge ;
-    private $correo ;
+    private $user ;
+    private $password
 
-    public function __construct($id_provider, $name_provider, $telefono, $correo) {
-        $this->id_provider = $id_provider;
-        $this->name_provider = $name_provider;
-        $this->telefono = $telefono;
-        $this->correo = $correo;
+    public function __construct($name_admin, $charge, $user, $password ) {
+        $this->name_admin = $name_admin;
+        $this->charge = $charge;
+        $this->user  = $user ;
+        $this->password = $password;
     }
 }
 

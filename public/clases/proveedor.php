@@ -4,8 +4,7 @@ class Proveedor{
     private $telefono ;
     private $correo ;
 
-    public function __construct($id_provider, $name_provider, $telefono, $correo) {
-        $this->id_provider = $id_provider;
+    public function __construct($name_provider, $telefono, $correo) {
         $this->name_provider = $name_provider;
         $this->telefono = $telefono;
         $this->correo = $correo;
