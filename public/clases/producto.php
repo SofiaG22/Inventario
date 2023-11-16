@@ -6,10 +6,12 @@ class Producto{
     private $descriptionProduct ;
     private $priceProduct ;
 
-    // public function __construct($nombre, $edad) {
-    //     $this->nombre = $nombre;
-    //     $this->edad = $edad;
-    // }
+    public function __construct($id_product, $name_product, $descriptionProduct , $priceProduct) {
+        $this->id_product = $id_product;
+        $this->name_product = $name_product;
+        $this->descriptionProduct = $descriptionProduct;
+        $this->priceProduct = $priceProduct;
+    }
 
     // Otros métodos de la clase
     public function saludar() {
