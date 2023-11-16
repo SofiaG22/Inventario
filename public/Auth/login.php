@@ -12,6 +12,7 @@
                     while($row =$result->fetch_array()){
                         session_start();
                         $_SESSION['user']=$row['nombre_admin'];
+                        $_SESSION['store']=$row['id_tienda'];
                         header("Location: index.php");
                     }
                 }
