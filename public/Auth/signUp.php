@@ -38,7 +38,13 @@ if(isset($_POST['submitSignUp'])){
                 
             }
             else{
-                echo "A  ocurrdio un error peurba mas tarde";
+                echo "<script>
+                    Swal.fire({
+                icon: 'error',
+                title: 'a ocurrido un error',
+                text: 'no se encontro el id de tienda o hay un error en la conexion'
+            });
+               </script>";
             }
             
         }
