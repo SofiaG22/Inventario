@@ -2,7 +2,7 @@
 <input type="submit" name="closeSession" value="Cerrar sesión"></input>
 </form>
 <?php
-include('validateSession/validate.php');
+include('validateSession/validateTemplate.php');
 include('template/navbar.php');
 ?>
 <h1>Añadir proveedor</h1>

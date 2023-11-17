@@ -24,33 +24,67 @@ if(isset($_POST['submitSignUp'])){
 
         }
         else{
-            $query=("INSERT INTO `administrador`( `nombre_admin`, `cargo`, `usuario`, `contraseña`, `id_tienda`) VALUES ('$name','$charge','$email','$password',$idStore)");   
-            $result= mysqli_query($conex,$query);
-            if($result){
-                echo "<script>
+            try{
+
+                $query=("INSERT INTO `administrador`( `nombre_admin`, `cargo`, `usuario`, `contraseña`, `id_tienda`) VALUES ('$name','$charge','$email','$password',$idStore)");   
+                $result= mysqli_query($conex,$query);
+                if($result){
+                    echo "<script>
                     Swal.fire({
-                  icon: 'success',
-                  title: 'Usuario registrado con exito',
-                  footer:'<a href=../index.php>Ir a inicio</a>'
-                });
-                   </script>";    
+                        icon: 'success',
+                        title: 'Usuario registrado con exito',
+                        footer:'<a href=../index.php>Ir a inicio</a>'
+                      });
+                         </script>";    
+                  }
             }
-            else{
-                echo "<script>
-                    Swal.fire({
-                icon: 'error',
-                title: 'a ocurrido un error',
-                text: 'no se encontro el id de tienda o hay un error en la conexion',
-                footer:'no tienes una tienda? <a href=tiendaForm.php>Creala</a>'
-            });
-               </script>";
+            catch(Exception $e){
+                
+                    echo "<script>
+                    let nameSign= document.getElementById('nameSign');
+                    nameSign.value=`{$_POST['nameSign']}`
+     
+                    let chargeSign= document.getElementById('chargeSign');
+                    chargeSign.value=`{$_POST['chargeSign']}`
+     
+                    let emailSign= document.getElementById('emailSign');
+                    emailSign.value=`{$_POST['emailSign']}`
+     
+                    let passwordSign= document.getElementById('passwordSign');
+                    passwordSign.value=`{$_POST['passwordSign']}`
+    
+                        Swal.fire({
+                    icon: 'error',
+                    title: 'A ocurrido un error',
+                    text: 'no se encontro el id de tienda o hay un error en la conexion',
+                    footer:'no tienes una tienda? <a href=tiendaForm.php>Creala</a>'
+                });
+                   </script>";
             }
             
         }
     }
     else{
-        echo "completa los campos";
+        echo "<script>
+               let nameSign= document.getElementById('nameSign');
+               nameSign.value=`{$_POST['nameSign']}`
 
+               let chargeSign= document.getElementById('chargeSign');
+               chargeSign.value=`{$_POST['chargeSign']}`
+
+               let emailSign= document.getElementById('emailSign');
+               emailSign.value=`{$_POST['emailSign']}`
+
+               let passwordSign= document.getElementById('passwordSign');
+               passwordSign.value=`{$_POST['passwordSign']}`
+               let idStoreSign= document.getElementById('idStoreSign');
+               idStoreSign.value=`{$_POST['idStoreSign']}`
+
+               Swal.fire({
+                icon: 'error',
+                title: 'Completa los campos'
+              });
+              </script>";
     }
 }
 ?>
