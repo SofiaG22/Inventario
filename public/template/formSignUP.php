@@ -22,10 +22,8 @@ include("../validateSession/validatenTemplate.php")
         <input type="email" id="emailSign" name="emailSign">
         <label for="">contraseña</label>
         <input type="password" id="passwordSign" name="passwordSign">
-        <label for="">id tienda</label>
-        <input type="number" id="idStoreSign" name="idStoreSign">
-
-
+        <label for="">Escoger tienda</label>
+        <select name="idStoreSign" id="idStoreSign"></select>
 
         <input type="submit" name="submitSignUp">
 
