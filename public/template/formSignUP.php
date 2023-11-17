@@ -13,14 +13,14 @@ include("../validateSession/validatenTemplate.php")
 <body>
     <h1>Añadir Admin</h1>
     <form action="" method="post">
-        <label for="">nombre</label>
+        <label for="">Nombre</label>
         <input type="text" id="nameSign"name="nameSign">
 
-        <label for="">cargo</label>
+        <label for="">Cargo</label>
         <input type="text" id="chargeSign"name="chargeSign">
-        <label for="">email</label>
+        <label for="">Email</label>
         <input type="email" id="emailSign" name="emailSign">
-        <label for="">contraseña</label>
+        <label for="">Contraseña</label>
         <input type="password" id="passwordSign" name="passwordSign">
         <label for="">Escoger tienda</label>
         <select name="idStoreSign" id="idStoreSign"></select>

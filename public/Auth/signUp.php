@@ -15,7 +15,11 @@ try{
             echo "<script>
             option= document.createElement('option');
              option.value ={$row['id_tienda']};
+<<<<<<< HEAD
              option.text = '{$row['nombre']}';
+=======
+            option.text = {$row['nombre']};
+>>>>>>> ef482fa4371fdac7bf917ced542b164aeac72176
              select.add(option);
             </script>";
         }
