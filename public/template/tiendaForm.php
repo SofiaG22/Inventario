@@ -12,25 +12,34 @@ include("../validateSession/validatenTemplate.php")
 </head>
 <body>
     <h1>Crear tienda</h1>
-    <form action="" method="post">
+    <div class="container">
+        <div class="row"></div>
+            <div class="col"></div>
+                <form action="" method="post" class="row">
 
+                    <div class="col-6">
+                        <label class="col-2 col-form-label" for="">Nombre Tienda</label>
+                            <div class="col-10">
+                                <input type="text"  id="nameStore" name="nameStore">
+                            </div>
+                    </div>
 
+                    <div class="col-6">
+                        <label class="col-2 col-form-label" for="">Dirección Tienda</label>
+                            <div>
+                                <input type="text" id="adressStore"name="adressStore">
+                            </div>
+                    </div>
 
-        <div class="row">
-            <label class="col-2 col-form-label" for="">Nombre Tienda</label>
-            <div class="col-10">
-                <input type="text"  id="nameStore" name="nameStore">
+                    <input type="submit" name="submitStore">
+            
+                    <?php
+                        include("../handlers/addStore.php")
+                    ?>
+                </form>
             </div>
         </div>
-
-        <label for="">Dirección Tienda</label>
-        <input type="text" id="adressStore"name="adressStore">
-        <input type="submit" name="submitStore">
-
-        <?php
-        include("../handlers/addStore.php")
-        ?>
-    </form>
+    </div>
 
     <a href="formSignUp.php">Añadir admin</a>
    <a href="../index.php">Iniciar sesion</a>
