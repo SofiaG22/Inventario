@@ -1,5 +1,39 @@
 <?php
 include("../conexion/conexion.php");
+
+try{
+    $query=("SELECT * FROM tienda");
+    $result =mysqli_query($conex,$query);
+    // $options=array();
+    echo "<script>
+    let select =document.getElementById('idStoreSign');
+    let option;
+   
+   </script>";
+    if (mysqli_num_rows($result)>0){
+        while($row =$result->fetch_array()){
+            echo "<script>
+            option= document.createElement('option');
+             option.value ={$row['id_tienda']};
+            option.text = {$row['id_tienda']};
+             select.add(option);
+            </script>";
+        }
+    }else{
+        echo "<script>
+            option= document.createElement('option');
+             option.value ='no existen tiendas';
+            option.text = 'no existen tiendas';
+             select.add(option);
+            </script>";
+    }
+    // foreach($options as $x){
+    //     echo $x;
+    // }
+}
+catch(Exception $e){
+}
+
 if(isset($_POST['submitSignUp'])){
 
     if(!empty($_POST['nameSign']) && !empty($_POST['chargeSign']) && !empty($_POST['emailSign'])  && !empty($_POST['passwordSign']) && !empty($_POST['idStoreSign']) ){

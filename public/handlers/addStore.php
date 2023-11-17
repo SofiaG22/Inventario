@@ -2,6 +2,7 @@
 include('../clases/tienda.php');
 include('../conexion/conexion.php');
 
+
 if( isset($_POST['submitStore'])){
     if( !empty($_POST['idStore']) && !empty($_POST['nameStore'])  && !empty($_POST['adressStore'])){
         $store =new Tienda($_POST['idStore'],$_POST['nameStore'],$_POST['adressStore']);
