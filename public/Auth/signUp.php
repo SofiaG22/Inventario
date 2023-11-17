@@ -15,7 +15,7 @@ try{
             echo "<script>
             option= document.createElement('option');
              option.value ={$row['id_tienda']};
-            option.text = {$row['id_tienda']};
+            option.text = {$row['nombre']};
              select.add(option);
             </script>";
         }
