@@ -1,43 +1,8 @@
 <?php
 include("../conexion/conexion.php");
+include("../clases/tienda.php");
 
-try{
-    $query=("SELECT * FROM tienda");
-    $result =mysqli_query($conex,$query);
-    // $options=array();
-    echo "<script>
-    let select =document.getElementById('idStoreSign');
-    let option;
-   
-   </script>";
-    if (mysqli_num_rows($result)>0){
-        while($row =$result->fetch_array()){
-            echo "<script>
-            option= document.createElement('option');
-             option.value ={$row['id_tienda']};
-<<<<<<< HEAD
-             option.text = '{$row['nombre']}';
-=======
-            option.text = {$row['nombre']};
->>>>>>> ef482fa4371fdac7bf917ced542b164aeac72176
-             select.add(option);
-            </script>";
-        }
-    }else{
-        echo "<script>
-            option= document.createElement('option');
-             option.value ='no existen tiendas';
-            option.text = 'no existen tiendas';
-             select.add(option);
-            </script>";
-    }
-    // foreach($options as $x){
-    //     echo $x;
-    // }
-}
-catch(Exception $e){
-}
-
+Tienda::getSelectStores($conex);
 if(isset($_POST['submitSignUp'])){
 
     if(!empty($_POST['nameSign']) && !empty($_POST['chargeSign']) && !empty($_POST['emailSign'])  && !empty($_POST['passwordSign']) && !empty($_POST['idStoreSign']) ){
