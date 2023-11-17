@@ -12,8 +12,6 @@ include("../validateSession/validatenTemplate.php")
 <body>
     <h1>Crear tienda</h1>
     <form action="" method="post">
-        <label for="">id de tienda</label>
-        <input type="number" id="idStore" name="idStore">
 
         <label for="">nombre Tienda</label>
         <input type="text"  id="nameStore" name="nameStore">

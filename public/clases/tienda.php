@@ -4,15 +4,14 @@ class Tienda{
     private $name_tienda ;
     private $direccion ;
 
-    public function __construct($id_tienda,$name_tienda, $direccion) {
-        $this->id_tienda = $id_tienda;
+    public function __construct($name_tienda, $direccion) {
         $this->name_tienda = $name_tienda;
         $this->direccion = $direccion;
     }
 
     public function setStore($conex){
         try{
-            $query=("INSERT INTO `tienda`(`id_tienda`, `nombre`, `direccion`) VALUES ({$this->id_tienda},'{$this->name_tienda}','{$this->direccion}')");
+            $query=("INSERT INTO `tienda`( `nombre`, `direccion`) VALUES ('{$this->name_tienda}','{$this->direccion}')");
 
             $result =mysqli_query($conex,$query);
             if ($result){
