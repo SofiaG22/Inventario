@@ -6,7 +6,6 @@ include('validateSession/validate.php');
 include('template/navbar.php');
 ?>
 <h1>Añadir proveedor</h1>
-<h2>Ver proveedor</h2>
 <form action="">
     <label for="">Nombre-Proveedor</label>
     <input type="text" name="nameProvider">
@@ -22,3 +21,4 @@ include('template/navbar.php');
     <input type="number" name="priceBuyProduct">
     <input type="submit">
 </form>
+<h2>Ver proveedor</h2>

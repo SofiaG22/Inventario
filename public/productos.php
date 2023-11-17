@@ -11,9 +11,9 @@ include('template/navbar.php');
 <form action="" method="post">
     <label for="">Nombre</label>
     <input type="text" name="nameProduct">
-    <label for="">Codigo</label>
+    <label for="">Código</label>
     <input type="number" name="numberProduct">
-    <label for="">Descripcion</label>
+    <label for="">Descripción</label>
     <input type="text" name="descripcionProduct">
     <label for="">Precio</label>
     <input type="number" name="priceProduct">

@@ -15,9 +15,6 @@ class Producto{
         $this->price_product = $price_product;
         $this->quantity_product = $quantity_product;
         $this->id_store = $quantity_product;
-
-
-
     }
 
     // Otros métodos de la clase
