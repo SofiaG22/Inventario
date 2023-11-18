@@ -58,7 +58,7 @@ class Tienda{
                     echo "<script>
                     option= document.createElement('option');
                      option.value ={$row['id_tienda']};
-                     option.text = '{$row['nombre']}';
+                     option.text = '{$row['nombre']}({$row['direccion']})';
                      select.add(option);
                     </script>";
                 }

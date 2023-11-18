@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <form action="" method="post">
 <input type="submit" name="closeSession" value="Cerrar sesión"></input>
 </form>
@@ -20,10 +22,13 @@ include('template/navbar.php');
     <label for="">Cantidad</label>
     <input type="number" name="quantityProduct">
     <input type="submit" name="submitProduct">
-    <?php
+
+</form>
+<form action="" method="post">
+    
+    <input type="submit"  value="Ver productos" name ="showProducts">
+</form>
+<?php
 
 include('handlers/producthandler.php');
 ?>
-<h2>Ver productos</h2>
-</form>
-<script src="js/addProduct.js"></script>
