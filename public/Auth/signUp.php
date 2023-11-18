@@ -1,5 +1,6 @@
 <?php
 include("../conexion/conexion.php");
+include("../clases/tienda.php");
 
 try{
     $query=("SELECT * FROM tienda");
@@ -36,7 +37,7 @@ catch(Exception $e){
 
 if(isset($_POST['submitSignUp'])){
 
-    if(!empty($_POST['nameSign']) && !empty($_POST['chargeSign']) && !empty($_POST['emailSign'])  && !empty($_POST['passwordSign']) && !empty($_POST['idStoreSign']) ){
+    if(!empty($_POST['nameSign']) && !empty($_POST['chargeSign']) && !empty($_POST['emailSign'])  && strlen($_POST['passwordSign'])>=8 && !empty($_POST['idStoreSign']) ){
         $name=$_POST['nameSign'];
         $charge=trim($_POST['chargeSign']);
         $email=trim($_POST['emailSign']);
@@ -116,7 +117,8 @@ if(isset($_POST['submitSignUp'])){
 
                Swal.fire({
                 icon: 'error',
-                title: 'Completa los campos'
+                title: 'Completa todos los campos ',
+                text:'la contraseña debe tener ocho caracteres'
               });
               </script>";
     }
