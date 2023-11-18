@@ -1,19 +1,19 @@
 <?php
 
 include("Auth/logOut.php");
-echo "<div class=Bienvenida>". $_SESSION['user']."</div>";
+// echo "<div class=Bienvenida>". $_SESSION['user']."</div>";
 ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <ul>
     <li><a href="index.php"><i></i>Inicio</a></li>
     <li><a href="productos.php"><i></i>Productos</a></li>
     <li><a href="proveedores.php"><i></i>Proveedores</a></li>
 
-</ul>
+</ul> -->
 
 <?php
 include("Auth/logOut.php");
-echo "<div class='Bienvenida'>" . $_SESSION['user'] . "</div>";
+echo "<b class='Bienvenida'>" . $_SESSION['user'] . "</b>";
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
