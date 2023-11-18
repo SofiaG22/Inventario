@@ -43,15 +43,22 @@ class Producto{
 public static function getProducts($conex, $store){
 
     try {
-        $ul="<ul>";
+        $table="<table >";
         $query=(" SELECT * from `producto` where id_tienda =$store");
         $result =mysqli_query($conex,$query);
         if (mysqli_num_rows($result)>0){
             while($row =$result->fetch_array()){
-                $ul.= "<li> {$row['nombre_producto']} precio:{$row['precio_venta']} <button id={$row['id_producto']} > editar</button> </li>";
+                $table.="<tr>";
+                $table.="<th> {$row['nombre_producto']}</th>";
+                $table.="<th> {$row['id_producto']}</th>";
+                $table.="<th> {$row['precio_venta']}</th>";
+                $table.="<th> <button> editar</button></th>";
+
+
+                $table.="</tr>";
             }
-            $ul.="<ul>";
-            echo $ul;
+            $table.="<table>";
+            echo $table;
         }
         else{
             echo "<script>
