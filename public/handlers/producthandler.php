@@ -14,11 +14,16 @@ if(isset($_POST['showProducts'])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !isset($_POST['submitProduct'])) {
-    foreach ($_POST as $campo => $valor) {
+    foreach ($_POST as $valor => $campo) {
         // Recorre todos los elementos en el array $_POST
-        $id=$campo;
+        $id=$valor;
     }
-    Producto::updateProduct($conex,$_SESSION['store'],$id);
+    if($campo =="editar"){
+        Producto::updateProduct($conex,$_SESSION['store'],$id);
+    }
+    elseif($campo =="Actualizar"){
+        echo "Actualizando";
+    }
 }
 
 ?>

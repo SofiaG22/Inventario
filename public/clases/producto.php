@@ -52,7 +52,7 @@ public static function getProducts($conex, $store){
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
-                $table.="<th> <form method='post'> <input type='submit' name='{$row['id_producto']}'> </form></th>";
+                $table.="<th> <form method='post'> <input type='submit' value='editar' name='{$row['id_producto']}'> </form></th>";
 
 
                 $table.="</tr>";
@@ -98,7 +98,7 @@ public static function updateProduct($conex,$id_store,$id_product){
         <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
         <label for= ''>Cantidad</label>
         <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
-        <input type='submit' name= 'editSubmitProduct '>
+        <input type='submit' value='Actualizar' name= 'editSubmitProduct '>
         
         </form>
         </div>";
