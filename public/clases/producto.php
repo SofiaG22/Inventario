@@ -52,7 +52,8 @@ public static function getProducts($conex, $store){
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
-                $table.="<th> <form method='post'> <input type='submit' value='editar' name='{$row['id_producto']}'> </form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'>editar </buttom></form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'>delete</button> </form></th>";
 
 
                 $table.="</tr>";
@@ -83,7 +84,7 @@ public  static function getProduct($conex, $store, $id){
     return $result;
 
 }
-public static function updateProduct($conex,$id_store,$id_product){
+public static function setProductInfo($conex,$id_store,$id_product){
     $result = Producto::getProduct($conex,$id_store,$id_product);
     while($row =$result->fetch_array()){
         $html ="<div> <p> editar {$row['nombre_producto']}</p>
@@ -98,13 +99,71 @@ public static function updateProduct($conex,$id_store,$id_product){
         <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
         <label for= ''>Cantidad</label>
         <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
-        <input type='submit' value='Actualizar' name= 'editSubmitProduct '>
+        <button type='submit' value='Actualizar' name= '{$row['id_producto']}'>Actualizar</button>
+        <button type='submit' value='CancelarActualizar' name= '{$row['id_producto']}'>Cancel</button>
+
         
         </form>
         </div>";
         echo $html;
             
                 }
+
+
+}
+public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda){
+   
+        try{
+            $query = "UPDATE `producto` SET `id_producto`=$id_ProductEdit, `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
+
+            $result =mysqli_query($conex,$query);
+            if ($result){
+                echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto actualizado con exito'
+              });
+                 </script>";   
+            }
+        }
+        catch(Exception $e){
+            echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar',
+                text:'Verifica el nuevo id '
+              });
+                 </script>";   
+        }
+    
+    
+
+}
+public static function deleteProduct($conex, $id){
+    
+    try{
+        $query = "DELETE FROM `producto` WHERE `id_producto`=$id";
+
+        $result =mysqli_query($conex,$query);
+        if ($result){
+            echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Producto Eliminado con exito'
+          });
+             </script>";   
+        }
+    }
+    catch(Exception $e){
+        echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al eliminar',
+            text:'Prueba de nuevo '
+          });
+             </script>";   
+    }
+
 
 
 }
