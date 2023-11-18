@@ -52,7 +52,7 @@ public static function getProducts($conex, $store){
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
-                $table.="<th> <button> editar</button></th>";
+                $table.="<th> <form method='post'> <input type='submit' value='editar' name='{$row['id_producto']}'> </form></th>";
 
 
                 $table.="</tr>";
@@ -77,6 +77,36 @@ public static function getProducts($conex, $store){
              </script>";   
     }
 } 
+public  static function getProduct($conex, $store, $id){
+    $query=(" SELECT * from `producto` where id_tienda = $store  and id_producto =$id" );
+    $result =mysqli_query($conex,$query);
+    return $result;
 
+}
+public static function updateProduct($conex,$id_store,$id_product){
+    $result = Producto::getProduct($conex,$id_store,$id_product);
+    while($row =$result->fetch_array()){
+        $html ="<div> <p> editar {$row['nombre_producto']}</p>
+        <form method='post'>
+        <label for= '' >Nombre</label>
+        <input type= 'text' name= 'editNameProduct' value={$row['nombre_producto']}>
+        <label for= ''>Código</label>
+        <input type= 'number' name= 'editNumberProduct' value={$row['id_producto']}>
+        <label for= ''>Descripción</label>
+        <input type= 'text ' name='editDescripcionProduct' value={$row['nombre_producto']}>
+        <label for= ''>Precio</label>
+        <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
+        <label for= ''>Cantidad</label>
+        <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
+        <input type='submit' value='Actualizar' name= 'editSubmitProduct '>
+        
+        </form>
+        </div>";
+        echo $html;
+            
+                }
+
+
+}
  }
 ?>
