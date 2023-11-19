@@ -36,7 +36,7 @@
                 ?>
               <li class="nav-item">
                 <form action="" method="post">
-                <input type="submit" name="closeSession" value="Cerrar sesión"></input>
+                <button type="submit" name="closeSession" value="Cerrar sesión"> Cerrar Sesíon</button>
                 </form>
             </li>
         </ul>
