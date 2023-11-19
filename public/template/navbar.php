@@ -1,8 +1,4 @@
-<?php
 
-include("Auth/logOut.php");
-// echo "<div class=Bienvenida>". $_SESSION['user']."</div>";
-?>
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <ul>
     <li><a href="index.php"><i></i>Inicio</a></li>
@@ -11,12 +7,10 @@ include("Auth/logOut.php");
 
 </ul> -->
 
-<?php
-include("Auth/logOut.php");
-echo "<b class='Bienvenida'>" . $_SESSION['user'] . "</b>";
-?>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
     <a class="navbar-brand" href="#">Tu Empresa</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,11 +20,24 @@ echo "<b class='Bienvenida'>" . $_SESSION['user'] . "</b>";
             <li class="nav-item active">
                 <a class="nav-link" href="index.php"><i></i>Inicio</a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="productos.php"><i></i>Productos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="proveedores.php"><i></i>Proveedores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="ventas.php"><i></i>Vender</a>
+            </li>
+                <?php
+                include("Auth/logOut.php");
+                echo "<li class='nav-item'> <a class='nav-link' href='profile.php'>" . $_SESSION['user'] . "</a></li>";
+                ?>
+              <li class="nav-item">
+                <form action="" method="post">
+                <input type="submit" name="closeSession" value="Cerrar sesión"></input>
+                </form>
             </li>
         </ul>
     </div>

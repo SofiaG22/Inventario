@@ -1,7 +1,4 @@
-<form action="" method="post">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<input type="submit" name="closeSession" value="Cerrar sesión"></input>
-</form>
 <?php
 include('validateSession/validateTemplate.php');
 include('template/navbar.php');
@@ -27,11 +24,6 @@ include('template/navbar.php');
     
     <input type="submit"  value="Ver proveedor" name ="showProveedor">
 </form>
-
-<?php
-include('validateSession/validateTemplate.php');
-include('template/navbar.php');
-?>
 <div class="container mt-5">
     <h1 class="text-center">Añadir proveedor</h1>
     <form action="" class="col-md-6 offset-md-3">

@@ -8,10 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
 
-        <input type="submit" name="closeSession" value="Cerrar sesión"></input>
-    </form>
 <?php
 include('navbar.php')
 ?>
