@@ -18,28 +18,73 @@ class Producto{
     }
 
     // Otros métodos de la clase
-    public function setProduct($conex) {
-        try {
+    public function setProduct($conex,$precio_provider,$id_provider) {
+        try{
             $query=("INSERT INTO `producto`(`id_producto`, `nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ({$this->id_product},'{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
             $result =mysqli_query($conex,$query);
-            if ($result){
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
+            $resultBought=mysqli_query($conex,$queryBought);
+            if ($resultBought){
                 echo "<script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Producto {$this->name_product} creado con  exito'
-                      });
-                         </script>";   
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Producto {$this->name_product} creado con  exito'
+                          });
+                                 </script>";   
+
             }
-        } catch (\Throwable $th) {
-            echo "<script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Ya existe un producto con codigo {$this->id_product} '
-              });
-                 </script>";   
+
         }
+        catch(Exception $e){
+            $queryProduct=("SELECT * FROM `producto` WHERE id_producto={$this->id_product} and id_tienda={$this->id_store} ");
+            $result =mysqli_query($conex,$queryProduct);
+            if(mysqli_num_rows($result)>0){
+                echo "<script>
+                Swal.fire({
+                icon: 'warning',
+                title: 'El producto con id{$this->id_product} ya existe ',
+                text:'Sus unidades fueron actualizadas'
+            });
+            </script>";  
+            $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+{$this->quantity_product}");
+            $resultUpdate=mysqli_query($conex,$queryUpdate);
+            if($resultUpdate){
+                echo"siiiiiiuu";
+            }
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
+            $resultBought=mysqli_query($conex,$queryBought);
+            }
+        }
+        }
+        // try {
+        //     $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
+        //     $resultBought=mysqli_query($conex,$queryBought);
+        //     if ($result){
+        //         echo "<script>
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Producto {$this->name_product} creado con  exito'
+        //               });
+        //                  </script>";   
+        //     }
+        //     else{
+        //         echo "<script>
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Producto'
+        //               });
+        //                  </script>";   
+        //     }
+        // } catch (\Throwable $th) {
+        //     echo "<script>
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: 'Ya existe un producto con codigo {$this->id_product} '
+        //       });
+        //          </script>";   
+        // }
     
-}
+
 public static function getProducts($conex, $store){
 
     try {
