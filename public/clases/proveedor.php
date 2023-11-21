@@ -27,7 +27,7 @@ class Proveedor{
                 echo "<script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Producto'
+                        title: 'Este proveedor ya esta registrado '
                       });
                          </script>";   
             }
