@@ -32,9 +32,6 @@ try{
 catch(Exception $e){
 }
 
-
-
-
 if( isset($_POST['submitProduct'])){
     if( !empty($_POST['numberProduct']) && !empty($_POST['nameProduct'])  && !empty($_POST['descripcionProduct'])&& !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
         echo $_POST['providerId'];
