@@ -18,13 +18,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-                <a class="nav-link" href="vender.php"><i></i>Vender</a>
-            </li>
+      
             <li class="nav-item active">
                 <a class="nav-link" href="index.php"><i></i>Inicio</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="vender.php"><i></i>Vender</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="productos.php"><i></i>Productos</a>
             </li>
