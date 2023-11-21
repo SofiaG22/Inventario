@@ -8,6 +8,7 @@ $_SESSION['filaSell']=10;
 
 
 <div class="container mt-5">
+<h1 class="text-center">Añadir Venta</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
 
@@ -30,7 +31,7 @@ $_SESSION['filaSell']=10;
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mx-auto d-block" name="submitSell">Vender</button>
+                <button type="submit" class="btn btn-primary mx-auto d-block" name="submitSell">Añadir</button>
             </form>
         </div>
     </div>

@@ -9,17 +9,7 @@
 </head>
 
 <body>
-    <h1>Iniciar sesion</h1>
-    <form action="" method="post" >
-        <input type="email"  id="emailLogin" name="emailLogin">
-        <input type="password" id="passwordLogin" name="passwordLogin">
-        <input type="submit" name="submitLogin" onclick="(e)=>{e.preventDefault()}">
-
-    <?php
-        include("Auth/login.php");
-    ?>
-    </form>
-
+    
     <h1 class="text-center">Iniciar sesión</h1>
 <form action="" method="post" class="col-md-6 offset-md-3 mt-4">
     <div class="mb-3">

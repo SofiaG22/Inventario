@@ -43,7 +43,7 @@ $_SESSION['filaSell']=10;
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1 class="text-center mb-4">Añadir productos</h1>
+            <h1 class="text-center mb-4">Añadir producto</h1>
 
             <form action="" method="post">
                 <div class="mb-3">
