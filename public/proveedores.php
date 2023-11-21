@@ -25,7 +25,7 @@ include('template/navbar.php');
             <input type="email" class="form-control" id="emailProveedor" name="emailProveedor">
 
         </div>
-        
+
         <button type="submit" class="btn btn-primary mx-auto d-block" name="submitProveedor" >Añadir</button>
     </form>
 </div>

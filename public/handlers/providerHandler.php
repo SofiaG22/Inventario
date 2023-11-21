@@ -1,4 +1,9 @@
 <?php
+if(isset($_POST['showProveedor'])){
+    
+}
+
+?><?php
 include("clases/proveedor.php");
 include("conexion/conexion.php");
 
