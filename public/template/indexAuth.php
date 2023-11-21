@@ -10,7 +10,8 @@
 <body>
 
 <?php
-include('navbar.php')
+include('navbar.php');
+include('handlers/indexAuth.php');
 ?>
 <form action="" method="post">
 <button type="submit" name="showSellsToday">Ver ventas del dia</button>
