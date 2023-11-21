@@ -15,6 +15,7 @@
                         $_SESSION['user']=$row['nombre_admin'];
                         $_SESSION['store']=$row['id_tienda'];
                         $_SESSION['filaSell']=10;
+                        $_SESSION['filaBought']=10;
                         header("Location: index.php");
                     }
                 }

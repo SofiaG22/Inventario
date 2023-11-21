@@ -14,15 +14,15 @@ include("../validateSession/validatenTemplate.php")
     <h1 class="text-center">Crear tienda</h1>
         <form action="" method="post" class="col-md-6 offset-md-3 mt-4">
             <div class="mb-3">
-                <label for="createStore" class="form-label">Nombre de la tienda</label>
-                <input type="text" class="form-control" id="createStore" name="createStore">
+                <label for="nameStore" class="form-label">Nombre de la tienda</label>
+                <input type="text" class="form-control" id="nameStore" name="nameStore">
             </div>
             <div class="mb-3">
-                <label for="storeAddress" class="form-label">Direccion de la tienda</label>
-                <input type="password" class="form-control" id="storeAddress" name="storeAddress">
+                <label for="adressStore" class="form-label">Direccion de la tienda</label>
+                <input type="password" class="form-control" id="vs" name="adressStore">
             </div>
 
-            <button type="submit" class="btn btn-primary mx-auto d-block" name="submitLogin" onclick="(e)=>{e.preventDefault()}">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-primary mx-auto d-block" name="submitStore" onclick="(e)=>{e.preventDefault()}">Iniciar Sesión</button>
     <?php
     include("../handlers/addStore.php");
     ?>

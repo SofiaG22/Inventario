@@ -7,4 +7,58 @@ class Compra{
         $this->cant_compra = $cant_compra;
         $this->precio_proveedor = $precio_proveedor;
     }
+    public static function setShowMoreBought(){
+        $_SESSION['filaBought']+=10;
+    }
+    public static function setShowLessBought(){
+        $_SESSION['filaBought']-=10;
+        if($_SESSION['filaBought']<10){
+            $_SESSION['filaBought']=10;
+        }
+    }
+    public static function getBoughts($conex,$id_store){
+            $query=("SELECT * FROM `compra` WHERE  (`id_tienda`) =$id_store LIMIT 0, {$_SESSION['filaBought']} ;");
+            $result = mysqli_query($conex,$query);
+            $queryTotal=("SELECT * FROM `compra` WHERE (`id_tienda`) =$id_store;");
+            $resultTotal = mysqli_query($conex,$queryTotal);
+            if($result && mysqli_num_rows($result)>0){
+                $table ="<table>";
+                $table.= "<tr>";
+                $table.="<th> ID DE COMPRA </th>";
+                $table.="<th> CANTIDAD COMPRADA</th>";
+                $table.="<th> PRECIO DE PRODUCTO </th>";
+                $table.="<th> CODIGO DE PRODUCTO</th>";
+                $table.="<th> PROVEEDOR </th>";
+                $table.="<th> FECHA </th>";
+                $table.="</tr>";
+    
+                while($row =$result->fetch_array()){
+                    $table.= "<tr>";
+                    $table.="<th> {$row['id_compra']} </th>";
+                    $table.="<th> {$row['cant_compra']} </th>";
+                    $table.="<th> {$row['precio_proveedor']}  </th>";
+                    $table.="<th> {$row['id_producto'] }</th>";
+                    $table.="<th> {$row['id_proveedor'] }</th>";
+                    $table.="<th> {$row['fecha']} </th>";
+                    $table.="</tr>";
+                }
+                $table .="</table>";
+                
+                if(mysqli_num_rows($resultTotal)> $_SESSION['filaBought']){
+                    $table .="<form method='post'><button type='submit' name='showMoreBought'>Cargar Más</button> </form>";
+                }
+                if($_SESSION['filaBought']>=20){
+                    $table .="<form method='post'><button type='submit' name='showLessBought'>Cargar Menos</button> </form>";
+                }
+                echo $table;
+            }
+            else{
+                echo "<script> 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Aun no has hecho compras a proveedores'
+                });
+                </script>";
+             }
+    }
 }

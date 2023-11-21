@@ -38,6 +38,8 @@
 include('validateSession/validateTemplate.php');
 include('template/navbar.php');
 $_SESSION['filaSell']=10;
+$_SESSION['filaBought']=10;
+
 ?> 
 
 <div class="container mt-5">

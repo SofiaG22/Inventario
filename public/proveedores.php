@@ -2,7 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 include('validateSession/validateTemplate.php');
+
 include('template/navbar.php');
+$_SESSION['filaSell']=10;
 ?>
 
 <div class="container mt-5">
@@ -31,7 +33,9 @@ include('template/navbar.php');
 </div>
 
 <form action="" method="post">
-    <input type="submit"  value="Ver proveedores" name ="showProveedor">
+   <button type="input" name="showProviders">Ver proveedores</button>
+   <button type="input" name="showBoughts">Ver historial de compras</button>
+
 </form>
 
 <?php

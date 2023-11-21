@@ -10,6 +10,7 @@
 <body>
 
 <?php
+$_SESSION['filaBought']=10;
 include('navbar.php');
 include('handlers/indexAuth.php');
 ?>

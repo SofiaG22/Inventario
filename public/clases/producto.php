@@ -22,9 +22,9 @@ class Producto{
         try{
             $query=("INSERT INTO `producto`(`id_producto`, `nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ({$this->id_product},'{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
             $result =mysqli_query($conex,$query);
-            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
-            if ($resultBought){
+            if ($result){
                 echo "<script>
                             Swal.fire({
                                 icon: 'success',
@@ -42,48 +42,28 @@ class Producto{
                 echo "<script>
                 Swal.fire({
                 icon: 'warning',
-                title: 'El producto con id{$this->id_product} ya existe ',
-                text:'Sus unidades fueron actualizadas'
+                title: 'Ya tienes un producto con codigo {$this->id_product}',
+                text:'Las unidades fueron añadidas al inventario'
             });
             </script>";  
             $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+{$this->quantity_product}");
             $resultUpdate=mysqli_query($conex,$queryUpdate);
-            if($resultUpdate){
-                echo"siiiiiiuu";
-            }
-            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
+            
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
+            }else{
+                echo "<script>
+                Swal.fire({
+                icon: 'error',
+                title: 'El id {$this->id_product}  ya esta siendo utilizado ',
+                text:'prueba otro id'
+            });
+            </script>";  
             }
+
+
         }
         }
-        // try {
-        //     $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider)");
-        //     $resultBought=mysqli_query($conex,$queryBought);
-        //     if ($result){
-        //         echo "<script>
-        //             Swal.fire({
-        //                 icon: 'success',
-        //                 title: 'Producto {$this->name_product} creado con  exito'
-        //               });
-        //                  </script>";   
-        //     }
-        //     else{
-        //         echo "<script>
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'Producto'
-        //               });
-        //                  </script>";   
-        //     }
-        // } catch (\Throwable $th) {
-        //     echo "<script>
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Ya existe un producto con codigo {$this->id_product} '
-        //       });
-        //          </script>";   
-        // }
-    
 
 public static function getProducts($conex, $store){
 
@@ -173,7 +153,6 @@ public static function setProductInfo($conex,$id_store,$id_product){
 
 }
 public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){
-   
         try{
             $query = "UPDATE `producto` SET `id_producto`=$id_ProductEdit, `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
 

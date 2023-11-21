@@ -15,6 +15,10 @@ public static function setShowMore(){
 }
 public static function setShowLess(){
     $_SESSION['filaSell']-=10;
+    if($_SESSION['filaSell']<10){
+    $_SESSION['filaSell']=10;
+
+    }
 }
 public static function getSells($conex,$id_store){
         $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store LIMIT 0, {$_SESSION['filaSell']} ;");
@@ -46,7 +50,7 @@ public static function getSells($conex,$id_store){
             if(mysqli_num_rows($resultTotal)>$_SESSION['filaSell']){
                 $table .="<form method='post'><button type='submit' name='showMore'>Cargar Más</button> </form>";
             }
-            if($_SESSION['filaSell']>=20){
+            if($_SESSION['filaSell']>20){
                 $table .="<form method='post'><button type='submit' name='showLess'>Cargar Menos</button> </form>";
             }
             echo $table;
