@@ -18,6 +18,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+                <a class="nav-link" href="vender.php"><i></i>Vender</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="index.php"><i></i>Inicio</a>
             </li>
@@ -28,9 +31,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="proveedores.php"><i></i>Proveedores</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="vender.php"><i></i>Vender</a>
-            </li>
+          
                 <?php
                 include("Auth/logOut.php");
                 echo "<li class='nav-item'> <a class='nav-link' href='profile.php'>" . $_SESSION['user'] . "</a></li>";
