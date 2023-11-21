@@ -61,15 +61,19 @@ $_SESSION['filaSell']=10;
                     <input type="text" class="form-control" id="descripcionProduct" name="descripcionProduct">
                 </div>
 
-                <div class="mb-3">
-                    <label for="priceProduct" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="priceProduct" name="priceProduct">
-                </div>
 
                 <div class="mb-3">
-                    <label for="quantityProduct" class="form-label">Cantidad</label>
-                    <input type="number" class="form-control" id="quantityProduct" name="quantityProduct">
-                </div>
+            <label for="priceBought" class="form-label">Precio Compra</label>
+            <input type="number" class="form-control" id="precioCompra" name="precioCompra">
+        </div>
+        <div class="mb-3">
+            <label for="puantityBought" class="form-label">Cantidad Compra</label>
+            <input type="number" class="form-control" id="cantidadCompra" name="cantidadCompra">
+        </div>
+        <div class="mb-3">
+            <label for="providerBought" class="form-label">Proveedor Compra</label>
+            <input type="select" class="form-control" id="precioCompra" name="precioCompra">
+        </div>
 
                 <button type="submit" class="btn btn-primary mx-auto d-block" name="submitProduct">Añadir</button>
             </form>
