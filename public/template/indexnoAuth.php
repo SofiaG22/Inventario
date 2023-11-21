@@ -19,6 +19,24 @@
         include("Auth/login.php");
     ?>
     </form>
+
+    <h1 class="text-center">Iniciar sesión</h1>
+<form action="" method="post" class="col-md-6 offset-md-3 mt-4">
+    <div class="mb-3">
+        <label for="emailLogin" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="emailLogin" name="emailLogin">
+    </div>
+    <div class="mb-3">
+        <label for="passwordLogin" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="passwordLogin" name="passwordLogin">
+    </div>
+    <button type="submit" class="btn btn-primary mx-auto d-block" name="submitLogin" onclick="(e)=>{e.preventDefault()}">Iniciar Sesión</button>
+
+    <?php
+    include("Auth/login.php");
+    ?>
+</form>
+
     
    <a href="template/tiendaForm.php">Crear tienda</a>
    <a href="template/formSignUp.php">Crear Cuenta</a>
