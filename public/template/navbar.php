@@ -28,7 +28,7 @@
                 <a class="nav-link" href="proveedores.php"><i></i>Proveedores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ventas.php"><i></i>Vender</a>
+                <a class="nav-link" href="vender.php"><i></i>Vender</a>
             </li>
                 <?php
                 include("Auth/logOut.php");

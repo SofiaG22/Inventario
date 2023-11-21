@@ -44,6 +44,14 @@ public static function getProducts($conex, $store){
 
     try {
         $table="<table >";
+        $table.="<tr>";
+        $table.="<th id='nombretabla'> Nombre</th>";
+        $table.="<th> Codigo</th>";
+        $table.="<th> Precio</th>";
+        $table.="<th> Cantidad</th>";
+        $table.="<th> Editar</th>";
+        $table.="<th> Eliminar</th>";
+        $table.="</tr>";
         $query=(" SELECT * from `producto` where id_tienda =$store");
         $result =mysqli_query($conex,$query);
         if (mysqli_num_rows($result)>0){
@@ -52,8 +60,9 @@ public static function getProducts($conex, $store){
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'>editar </buttom></form></th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'>delete</button> </form></th>";
+                $table.="<th> {$row['prcant_existente']}</th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'>iconEdit </buttom></form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'>iconDelete</button> </form></th>";
 
 
                 $table.="</tr>";
@@ -81,43 +90,50 @@ public static function getProducts($conex, $store){
 public  static function getProduct($conex, $store, $id){
     $query=(" SELECT * from `producto` where id_tienda = $store  and id_producto =$id" );
     $result =mysqli_query($conex,$query);
-    return $result;
+    if($result && mysqli_num_rows($result) > 0){
 
+        return $result;
+    }
 }
 public static function setProductInfo($conex,$id_store,$id_product){
     $result = Producto::getProduct($conex,$id_store,$id_product);
     while($row =$result->fetch_array()){
-        $html ="<div> <p> editar {$row['nombre_producto']}</p>
-        <form method='post'>
-        <label for= '' >Nombre</label>
-        <input type= 'text' name= 'editNameProduct' value={$row['nombre_producto']}>
-        <label for= ''>Código</label>
-        <input type= 'number' name= 'editNumberProduct' value={$row['id_producto']}>
-        <label for= ''>Descripción</label>
-        <input type= 'text ' name='editDescripcionProduct' value={$row['nombre_producto']}>
-        <label for= ''>Precio</label>
-        <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
-        <label for= ''>Cantidad</label>
-        <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
-        <button type='submit' value='Actualizar' name= '{$row['id_producto']}'>Actualizar</button>
-        <button type='submit' value='CancelarActualizar' name= '{$row['id_producto']}'>Cancel</button>
-
-        
-        </form>
-        </div>";
-        echo $html;
+        echo "<script>
+        Swal.fire({
+            title: 'Editar {$row['nombre_producto']}',
+            showCloseButton: true,
+            showConfirmButton: false,
+            html:`<div>
+            <form method='post'>
+            <label for= '' >Nombre</label>
+            <input type= 'text' name= 'editNameProduct' value={$row['nombre_producto']}>
+            <label for= ''>Código</label>
+            <input type= 'number' name= 'editNumberProduct' value={$row['id_producto']}>
+            <label for= ''>Descripción</label>
+            <input type= 'text ' name='editDescripcionProduct' value={$row['nombre_producto']}>
+            <label for= ''>Precio</label>
+            <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
+            <label for= ''>Cantidad</label>
+            <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
+            <button type='submit' value='Actualizar' name= '{$row['id_producto']}'>Actualizar</button>
+            <button type='submit' value='CancelarActualizar' name= '{$row['id_producto']}'>Cancel</button>
+            
+            </form>
+            </div>`
+          })
+             </script>";   
             
                 }
 
 
 }
-public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda){
+public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){
    
         try{
             $query = "UPDATE `producto` SET `id_producto`=$id_ProductEdit, `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
 
             $result =mysqli_query($conex,$query);
-            if ($result){
+            if ($result && $showMessagge){
                 echo "<script>
             Swal.fire({
                 icon: 'success',

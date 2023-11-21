@@ -15,19 +15,19 @@ if(isset($_POST['showProducts'])){
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !isset($_POST['submitProduct'])) {
     foreach ($_POST as $valor => $campo) {
-    $id=$valor;
+        $id=$valor;
     }
     if($campo =="Editar"){
         Producto::setProductInfo($conex,$_SESSION['store'],$id);
     }
     elseif($campo =="Actualizar"){
-        Producto::updateProduct($conex,$id,$_POST['editNumberProduct'],$_POST['editNameProduct'],$_POST['editpriceProduct'],$_POST['editQuantityProduct'],$_SESSION['store']);
+        Producto::updateProduct($conex,$id,$_POST['editNumberProduct'],$_POST['editNameProduct'],$_POST['editpriceProduct'],$_POST['editQuantityProduct'],$_SESSION['store'],true);
     }
     elseif($campo =="Eliminar"){
         Producto::deleteProduct($conex, $id);
     }
-    elseif($campo =="CancelarActualizar"){
-    }
+    
+  
 }
 
 ?>

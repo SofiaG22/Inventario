@@ -1,0 +1,2 @@
+1.  decidir si cambiar le id de producto por un alfanumerico, asi dos tiendas 
+pueden tener el mismo id de producot sin problema. 
