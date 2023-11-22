@@ -15,7 +15,7 @@ class Proveedor{
         try {
             $query=("INSERT INTO `proveedor`(`id_proveedor`, `nombre_proveedor`, `telefono`, `correo`,`id_tienda`) VALUES ({$this->id_provider},'{$this->name_provider}',{$this->telefono},'{$this->correo}', {$_SESSION['store']})");
             $result =mysqli_query($conex,$query);
-            if ($result){
+            if ($result && mysqli_affected_rows($conex)>0){
                 echo "<script>
                     Swal.fire({
                         icon: 'success',

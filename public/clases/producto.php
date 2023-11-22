@@ -23,7 +23,7 @@ class Producto{
             $result =mysqli_query($conex,$query);
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
-            if ($result){
+            if ($result && mysqli_affected_rows($conex)>0){
                 echo "<script>
                             Swal.fire({
                                 icon: 'success',
