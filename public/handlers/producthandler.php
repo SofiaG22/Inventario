@@ -28,6 +28,7 @@ if(isset($_POST['showProducts'])){
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !isset($_POST['submitProduct'])) {
     foreach ($_POST as $valor => $campo) {
         $id=$valor;
+        // echo$campo .$valor;
     }
     if($campo =="Editar"){
         Producto::setProductInfo($conex,$_SESSION['store'],$id);
@@ -38,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !
     elseif($campo =="Eliminar"){
         Producto::deleteProduct($conex, $id);
     }
-    
+    elseif($campo =="addQuantity"){
+
+        Producto::updateQuantityproduct($conex, $id, $_POST['quantityEditProduct'],$_POST['priceProvierEditProduct'],$_POST['idProviderEditProduct']);
+    }
   
 }
 
