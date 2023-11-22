@@ -1,5 +1,8 @@
 1.Decidir si cambiar le id de producto por un alfanumerico, asi dos tiendas 
 pueden tener el mismo id de producot sin problema. 
-2.productos al darle añadir no deje sin haber proveedor
+***2.productos al darle añadir no deje sin haber proveedor
 3.estilos tabla
 4.estlo profile
+5.Mostrar ultimo precio de compra
+6.eliminar cuenta
+7.eliminar venta
