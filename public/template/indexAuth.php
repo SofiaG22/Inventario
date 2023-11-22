@@ -16,7 +16,9 @@ include('handlers/indexAuth.php');
 ?>
 <form action="" method="post">
 <button type="submit" name="showSellsToday">Ver ventas del dia</button>
-<button type="submit" name="getTotalSell" >Ver total vendido</button>
+<button type="submit" name="showSellsAdmin">Ver total vendido admin</button>
+
+<button type="submit" name="getTotalSell" >Ver total vendido tienda</button>
 <?php
 //include('handlers/indexAuthHandler.php')
 ?>

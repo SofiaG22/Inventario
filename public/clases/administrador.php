@@ -41,5 +41,36 @@ class Administrador{
             echo $html;
         }
     }
+    public static function setDeleteAlert(){
+        echo "<script> 
+        Swal.fire({
+            icon: 'warning',
+            showCloseButton: true,
+            showConfirmButton: false,
+            title: '¿Quieres eliminar la cuenta?',
+            html:`<b>Esta sera suspendida y no podras ingresar de nuevo</b> </br>
+            No podras ver las ventas del dia que haya realizado este usuario
+            <form method='post'>
+            <button type='submit' value='deleteAdmin' name='deleteAdmin'>Aceptar</button>
+            <button type='submit' name='cancel'>cancelar</button>
+            </form>
+            `
+        });
+        </script>";
+    }
+    public static function deleteAdmin($conex){
+        $newPassword=md5(mt_rand(10000, 100000));
+        $newUser=md5(mt_rand(10000, 100000));
+        $query =("UPDATE `administrador` SET `contraseña`='$newPassword',`usuario`='$newUser' WHERE id_administrador ={$_SESSION['idAdmin']} ");
+        $result = mysqli_query($conex,$query);
+        if ($result){
+            session_start();
+            session_regenerate_id(true);
+            session_destroy();
+            $_SESSION = array();
+            header("Location: index.php");
+        }
+     
+    }
 }
 ?>

@@ -21,9 +21,9 @@ public static function setShowLess(){
     }
 }
 public static function getSells($conex,$id_store){
-        $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store LIMIT 0, {$_SESSION['filaSell']} ;");
+        $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']} LIMIT 0, {$_SESSION['filaSell']} ;");
         $result = mysqli_query($conex,$query);
-        $queryTotal=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store;");
+        $queryTotal=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']};");
         $resultTotal = mysqli_query($conex,$queryTotal);
         if($result && mysqli_num_rows($result)>0){
             $table ="<table>";
@@ -34,6 +34,7 @@ public static function getSells($conex,$id_store){
             $table.="<th> PRODUCTO </th>";
             $table.="<th> TOTAL </th>";
             $table.="<th> FECHA </th>";
+            $table.="<th> Eliminar</th>";
             $table.="</tr>";
 
             while($row =$result->fetch_array()){
@@ -44,6 +45,7 @@ public static function getSells($conex,$id_store){
                 $table.="<th> {$row['id_producto'] }</th>";
                 $table.="<th> {$row['total'] }</th>";
                 $table.="<th> {$row['fecha']} </th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_venta']}'>iconDelete</button> </form> </th>";
                 $table.="</tr>";
             }
             $table .="</table>";
@@ -66,7 +68,7 @@ public static function getSells($conex,$id_store){
 }
     
 
-public static function setSell($conex,$id_store,$id_product,$quantitySell,$idClient){
+public static function setSell($conex,$id_store,$id_product,$quantitySell,$idClient,$name_admin){
     $result = Producto::getProduct($conex,$id_store,$id_product);
     if($result){
         try{
@@ -74,7 +76,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                 if($row['prcant_existente']>=$quantitySell){
                     $cliente = Cliente::setIdSell($conex,$idClient);
                     $total=($row['precio_venta'] * $quantitySell);
-                    $querySell=("INSERT INTO `venta`( `cant_venta`,`id_cliente`, `id_producto`, `id_tienda`,`total`) VALUES ($quantitySell,$cliente,$id_product,$id_store,$total)");
+                    $querySell=("INSERT INTO `venta`( `cant_venta`,`id_cliente`, `id_producto`, `id_tienda`,`total`,`id_administrador`) VALUES ($quantitySell,$cliente,$id_product,$id_store,$total,{$_SESSION['idAdmin']})");
                     $resultSell =mysqli_query($conex,$querySell);
                     if($resultSell){
                         $id_venta = mysqli_insert_id($conex);
@@ -86,7 +88,8 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                                 html:`<b> ID venta : </b> {$id_venta} <br> 
                                 <b> ID cliente :</b> {$idClient}<br>
                                 <b> Producto : </b> {$row['nombre_producto']} * $quantitySell <br>
-                                <b> Total : COP </b>$".$total."<br>`,
+                                <b> Total : COP </b>$".$total."<br>
+                                <b>Encargado:</b> {$name_admin} <br>`,
                                 });
                             </script>";
                         }  
@@ -147,5 +150,48 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
         }
         
 
+    }
+    public static function getTotalSellAdmin($conex, $store){
+        $query=("SELECT
+        (SELECT SUM(total) FROM venta WHERE DATE(fecha) = CURDATE() AND id_tienda = $store AND (`id_administrador`)={$_SESSION['idAdmin']} ) as total_suma,
+        (SELECT COUNT(*) FROM venta WHERE DATE(fecha) = CURDATE() AND id_tienda = $store  AND (`id_administrador`)={$_SESSION['idAdmin']} ) as total_registros;");
+        $result=mysqli_query($conex,$query);
+        if(mysqli_num_rows($result)>0){
+            while($row= $result->fetch_array()){
+                if( $row['total_suma']>0){
+                    echo "<script> Swal.fire({
+                        title: 'Felicidades por las ventas :D',
+                        html:`<b>ventas :</b> = {$row['total_registros']}<br> <b>total vendido :$</b>{$row['total_suma']}`,
+                        });
+                        </script>";
+                }
+                else{
+                    echo "<script> Swal.fire({
+                        icon: 'error',
+                        title: 'Aun no tienes ventas :(',
+                        timer:2000
+                        });
+                        </script>";
+                }
+                }
+        }
+        
+
+    }
+    public static function deleteSell($conex, $id){
+        $query=("DELETE FROM venta WHERE id_venta=$id") ;
+        $result=mysqli_query($conex,$query);
+        if($result){
+            echo "<script> Swal.fire({
+                icon: 'success',
+                showConfirmButton: false,
+                title: 'Venta eliminada',
+                timer:1500
+                });
+                </script>";
+        }
+        else{
+            echo"error";
+        }
     }
 }
