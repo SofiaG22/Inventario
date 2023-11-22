@@ -22,26 +22,24 @@ class Administrador{
                 $html.="<div class='mb-3'>
                 <h1 class='text-center'>Informacion Administrador</h1>
                 <h5 for='nameAdmin'>Nombre:</h5>
-                <p id='nameAdmin' name='nameAdmin'>{$row['nombre_admin']}</p>
+                <p>{$row['nombre_admin']}</p>
                 </div>";
-                $html.="<div>
+                $html.="<div class='mb-3'>
                 <h5 for='chargeAdmin'>Cargo:</h5>
-                <p id='chargeAdmin' name='chargeAdmin'>{$row['cargo']}</p>
+                <p>{$row['cargo']}</p>
                 </div>";
-                $html.="<div>
+                $html.="<div class='mb-3'>
                 <h5 for='userAdmin'>Usuario:</h5>
-                <p id='userAdmin' name='userAdmin'>{$row['usuario']}</p>
+                <p>{$row['usuario']}</p>
                 </div>";
-                $html.="<div>
+                $html.="<div class='mb-3'>
                 <h5 for='storeAdmin'>Tienda:</h5>
-                <p id='storeAdmin' name='storeAdmin'>{$row['nombre_tienda']}</p>
+                <p>{$row['nombre_tienda']}</p>
                 </div>";
             }
             $html.="</div>";
             echo $html;
-        }else
-            echo"no hay resultados";
+        }
     }
 }
-
 ?>

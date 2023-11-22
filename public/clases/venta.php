@@ -27,7 +27,7 @@ public static function getSells($conex,$id_store){
         $resultTotal = mysqli_query($conex,$queryTotal);
         if($result && mysqli_num_rows($result)>0){
             $table ="<table>";
-            $table.= "<tr>";
+            $table.="<tr>";
             $table.="<th> ID DE VENTA </th>";
             $table.="<th> CLIENTE </th>";
             $table.="<th> CANTIDAD </th>";
@@ -37,10 +37,10 @@ public static function getSells($conex,$id_store){
             $table.="</tr>";
 
             while($row =$result->fetch_array()){
-                $table.= "<tr>";
+                $table.="<tr>";
                 $table.="<th> {$row['id_venta']} </th>";
-                $table.="<th> {$row['cant_venta']} </th>";
                 $table.="<th> {$row['id_cliente']}  </th>";
+                $table.="<th> {$row['cant_venta']} </th>";
                 $table.="<th> {$row['id_producto'] }</th>";
                 $table.="<th> {$row['total'] }</th>";
                 $table.="<th> {$row['fecha']} </th>";
