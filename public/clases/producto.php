@@ -43,14 +43,23 @@ class Producto{
                 Swal.fire({
                 icon: 'warning',
                 title: 'Ya tienes un producto con codigo {$this->id_product}',
-                text:'Las unidades fueron añadidas al inventario'
+                showCloseButton: true,
+                showConfirmButton: false,
+                html:`<p>Quieres descartar la consulta o añadir las unidades el producto que ya existe</p>
+                <form method='post'>
+                <input type='number' class='d-none'value='{$this->quantity_product}' name='quantityEditProduct'>
+                <input type='number'class='d-none' value='{$id_provider}' name='idProviderEditProduct'>
+                <input type='number' class='d-none' value='{$precio_provider}' name='priceProvierEditProduct'>
+                <button type='submit' value='addQuantity' name='{$this->id_product}'>Aceptar</button>
+                <button type='submit' name='cancel'>descartar</button>
+                </form>`
             });
             </script>";  
-            $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+{$this->quantity_product}");
-            $resultUpdate=mysqli_query($conex,$queryUpdate);
+            // $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`{$this->quantity_product}");
+            // $resultUpdate=mysqli_query($conex,$queryUpdate);
             
-            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
-            $resultBought=mysqli_query($conex,$queryBought);
+            // $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
+            // $resultBought=mysqli_query($conex,$queryBought);
             }else{
                 echo "<script>
                 Swal.fire({
@@ -64,7 +73,13 @@ class Producto{
 
         //}
         }
-
+        public static function updateQuantityproduct($conex,$id, $cantidad,$precio_provider,$id_provider){
+            $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+$cantidad where id_producto={$id}");
+            $resultUpdate=mysqli_query($conex,$queryUpdate);
+            
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$cantidad},{$precio_provider},{$id},{$id_provider},{$_SESSION['store']})");
+            $resultBought=mysqli_query($conex,$queryBought);            
+        }
 public static function getProducts($conex, $store){
 
     try {
