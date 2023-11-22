@@ -31,7 +31,8 @@ public static function getSells($conex,$id_store){
             $table.="<th> ID DE VENTA </th>";
             $table.="<th> CLIENTE </th>";
             $table.="<th> CANTIDAD </th>";
-            $table.="<th> PRODUCTO </th>";
+            $table.="<th> CODIGO </th>";
+            $table.="<th> NOMBRE PROD </th>";
             $table.="<th> TOTAL </th>";
             $table.="<th> FECHA </th>";
             $table.="<th> Eliminar</th>";
@@ -43,6 +44,8 @@ public static function getSells($conex,$id_store){
                 $table.="<th> {$row['id_cliente']}  </th>";
                 $table.="<th> {$row['cant_venta']} </th>";
                 $table.="<th> {$row['id_producto'] }</th>";
+                $table.="<th> {$row['nombre_producto'] }</th>";
+
                 $table.="<th> {$row['total'] }</th>";
                 $table.="<th> {$row['fecha']} </th>";
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_venta']}'>iconDelete</button> </form> </th>";
@@ -76,7 +79,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                 if($row['prcant_existente']>=$quantitySell){
                     $cliente = Cliente::setIdSell($conex,$idClient);
                     $total=($row['precio_venta'] * $quantitySell);
-                    $querySell=("INSERT INTO `venta`( `cant_venta`,`id_cliente`, `id_producto`, `id_tienda`,`total`,`id_administrador`) VALUES ($quantitySell,$cliente,$id_product,$id_store,$total,{$_SESSION['idAdmin']})");
+                    $querySell=("INSERT INTO `venta`( `cant_venta`,`id_cliente`, `id_producto`, `id_tienda`,`total`,`id_administrador` ,`nombre_producto`) VALUES ($quantitySell,$cliente,$id_product,$id_store,$total,{$_SESSION['idAdmin']},'{$row['nombre_producto']}')");
                     $resultSell =mysqli_query($conex,$querySell);
                     if($resultSell){
                         $id_venta = mysqli_insert_id($conex);
@@ -87,7 +90,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                                 title: 'Factura de venta',
                                 html:`<b> ID venta : </b> {$id_venta} <br> 
                                 <b> ID cliente :</b> {$idClient}<br>
-                                <b> Producto : </b> {$row['nombre_producto']} * $quantitySell <br>
+                                <b>  Producto : </b> {$row['nombre_producto']} * $quantitySell <br>
                                 <b> Total : COP </b>$".$total."<br>
                                 <b>Encargado:</b> {$name_admin} <br>`,
                                 });

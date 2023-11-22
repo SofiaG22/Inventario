@@ -90,7 +90,7 @@ $_SESSION['filaBought']=10;
 </form>
 <form action="" method="post">
     
-    <button type="submit"  value="Ver productos" name ="showProducts"> ver productos</button>
+    <button type="submit"  value="Ver productos" name ="showProducts"> ver y editar productos</button>
 </form>
 
 <?php

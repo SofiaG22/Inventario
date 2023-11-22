@@ -49,8 +49,8 @@ class Producto{
                 <input type='number' class='d-none'value='{$this->quantity_product}' name='quantityEditProduct'>
                 <input type='number'class='d-none' value='{$id_provider}' name='idProviderEditProduct'>
                 <input type='number' class='d-none' value='{$precio_provider}' name='priceProvierEditProduct'>
-                <button type='submit' value='addQuantity' name='{$this->id_product}'>Aceptar</button>
-                <button type='submit' name='cancel'>descartar</button>
+                <button type='submit' name='cancel'>Descartar</button>
+                <button type='submit' value='addQuantity' name='{$this->id_product}'>Agregar</button>
                 </form>`
             });
             </script>";  
@@ -63,8 +63,8 @@ class Producto{
                 echo "<script>
                 Swal.fire({
                 icon: 'error',
-                title: 'El id {$this->id_product}  ya esta siendo utilizado ',
-                text:'prueba otro id'
+                title: 'El Codigo {$this->id_product} no esta disponible ',
+                text:'prueba otro codigo'
             });
             </script>";  
             }
@@ -101,8 +101,10 @@ public static function getProducts($conex, $store){
                 $resultPriceBought =mysqli_query($conex,$queryPriceBought);
                 while($rowl= $resultPriceBought->fetch_array()){
                     $lastPriceBought= $rowl['precio_proveedor'];
+                    // echo $rowl['precio_proveedor'].$row['nombre_producto'];
 
                     }
+                echo $row['id_producto'];
                 $table.="<tr>";
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
