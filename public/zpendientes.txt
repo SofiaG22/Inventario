@@ -3,6 +3,8 @@ pueden tener el mismo id de producot sin problema.
 ***2.productos al darle añadir no deje sin haber proveedor
 3.estilos tabla
 4.estlo profile
-5.Mostrar ultimo precio de compra
+**5.Mostrar ultimo precio de compra
 6.eliminar cuenta
 7.eliminar venta
+8. En la venta, no mostrar todas las ventas de la tienda si no dle admin
+9.-- solucionar qeu dos tiendas puedan tener el mismo proveedor

@@ -17,9 +17,8 @@ class Producto{
         $this->id_store = $id_store;
     }
 
-    // Otros métodos de la clase
     public function setProduct($conex,$precio_provider,$id_provider) {
-        //try{
+        try{
             $query=("INSERT INTO `producto`(`id_producto`, `nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ({$this->id_product},'{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
             $result =mysqli_query($conex,$query);
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
@@ -34,8 +33,8 @@ class Producto{
 
             }
 
-        //}
-        //catch(Exception $e){
+        }
+        catch(Exception $e){
             $queryProduct=("SELECT * FROM `producto` WHERE id_producto={$this->id_product} and id_tienda={$this->id_store} ");
             $result =mysqli_query($conex,$queryProduct);
             if(mysqli_num_rows($result)>0){
@@ -71,7 +70,7 @@ class Producto{
             }
 
 
-        //}
+        }
         }
         public static function updateQuantityproduct($conex,$id, $cantidad,$precio_provider,$id_provider){
             $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+$cantidad where id_producto={$id}");
@@ -88,6 +87,7 @@ public static function getProducts($conex, $store){
         $table.="<th id='nombretabla'> Nombre</th>";
         $table.="<th> Codigo</th>";
         $table.="<th> Precio</th>";
+        $table.="<th> Ultimo precio de compra</th>";
         $table.="<th> Cantidad</th>";
         $table.="<th> Editar</th>";
         $table.="<th> Eliminar</th>";
@@ -95,11 +95,20 @@ public static function getProducts($conex, $store){
         $query=(" SELECT * from `producto` where id_tienda =$store");
         $result =mysqli_query($conex,$query);
         if (mysqli_num_rows($result)>0){
+            
             while($row =$result->fetch_array()){
+                $queryPriceBought=("SELECT *  FROM `compra` WHERE id_producto={$row['id_producto']} ORDER BY `fecha` DESC LIMIT 1;");
+                $resultPriceBought =mysqli_query($conex,$queryPriceBought);
+                while($rowl= $resultPriceBought->fetch_array()){
+                    $lastPriceBought= $rowl['precio_proveedor'];
+
+                    }
                 $table.="<tr>";
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
+                $table.="<th> {$lastPriceBought}</th>";
+
                 $table.="<th> {$row['prcant_existente']}</th>";
                 $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'>iconEdit </buttom></form></th>";
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'>iconDelete</button> </form></th>";
