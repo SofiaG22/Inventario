@@ -7,4 +7,5 @@ pueden tener el mismo id de producot sin problema.
 ***6.eliminar cuenta, pero mantener las ventas que haya echo ese admin
 ***7.eliminar venta
 ***8. En la venta, no mostrar todas las ventas de la tienda si no del admin
-9.solucionar qeu dos tiendas puedan tener el mismo proveedor
+**9.solucionar qeu dos tiendas puedan tener el mismo proveedor
+**10.poner el login y el signup dentro de la calse administrador

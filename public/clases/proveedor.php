@@ -1,41 +1,54 @@
 <?php
 class Proveedor{
     private $name_provider ;
-    private $id_provider ;
+    private $documento_proveedor ;
     private $telefono ;
     private $correo ;
 
-    public function __construct($id_provider,$name_provider, $telefono, $correo) {
+    public function __construct($documento_proveedor,$name_provider, $telefono, $correo) {
         $this->name_provider = $name_provider;
         $this->telefono = $telefono;
         $this->correo = $correo;
-        $this->id_provider = $id_provider;
+        $this->documento_proveedor = $documento_proveedor;
     }
     public function setProvider($conex){
         try {
-            $query=("INSERT INTO `proveedor`(`id_proveedor`, `nombre_proveedor`, `telefono`, `correo`,`id_tienda`) VALUES ({$this->id_provider},'{$this->name_provider}',{$this->telefono},'{$this->correo}', {$_SESSION['store']})");
-            $result =mysqli_query($conex,$query);
-            if ($result && mysqli_affected_rows($conex)>0){
+            $proveedor = Proveedor::getProvider($conex,$this->documento_proveedor );
+            if($proveedor){
                 echo "<script>
-                    Swal.fire({
-                        icon: 'success',
-                            title: 'Proveedor {$this->name_provider} creado con  exito'
-                      });
-                         </script>";   
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ya tienes registrado un proveedor con este documento'
+                  });
+                     </script>";   
             }
             else{
-                echo "<script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Este proveedor ya esta registrado '
-                      });
-                         </script>";   
+
+                $query=("INSERT INTO `proveedor`( `nombre_proveedor`, `telefono`, `correo`,`id_tienda`,`documento_proveedor`) VALUES ('{$this->name_provider}',{$this->telefono},'{$this->correo}', {$_SESSION['store']},{$this->documento_proveedor})");
+                $result =mysqli_query($conex,$query);
+                if ($result && mysqli_affected_rows($conex)>0){
+                    echo "<script>
+                        Swal.fire({
+                            icon: 'success',
+                                title: 'Proveedor {$this->name_provider} creado con  exito'
+                          });
+                             </script>";   
+                }
+                else{
+                    echo "<script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erroooor en esta consulta'
+                          });
+                             </script>";   
+                }
             }
+       
         } catch (\Throwable $th) {
             echo "<script>
             Swal.fire({
                 icon: 'error',
-                title: 'Este proveedor ya esta registrado '
+                title: ' '
               });
                  </script>";   
         }
@@ -52,7 +65,7 @@ class Proveedor{
             while($row =$result->fetch_array()){
                 echo "
                 option= document.createElement('option');
-                 option.value ={$row['id_proveedor']};
+                 option.value ={$row['documento_proveedor']};
                  option.text = '{$row['nombre_proveedor']}';
                  select.add(option);
                 </script>";
@@ -69,7 +82,7 @@ class Proveedor{
     }
     public static function getProvider($conex,$id_provider){
         
-        $query=("SELECT * FROM `proveedor` where id_tienda={$_SESSION['store']} and id_proveedor=$id_provider");
+        $query=("SELECT * FROM `proveedor` where id_tienda={$_SESSION['store']} and documento_proveedor=$id_provider");
         $result =mysqli_query($conex,$query);
        
         if (mysqli_num_rows($result)>0){
@@ -89,12 +102,12 @@ class Proveedor{
 
             while($row = $result->fetch_array()){
                 $table.="<tr>";
-                $table.="<th>{$row['id_proveedor']}</th>";
+                $table.="<th>{$row['documento_proveedor']}</th>";
                 $table.="<th>{$row['nombre_proveedor']}</th>";
                 $table.="<th>{$row['telefono']}</th>";
                 $table.="<th>{$row['correo']}</th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_proveedor']}'>iconEdit </buttom></form></th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_proveedor']}'>iconDelete</button> </form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['documento_proveedor']}'>iconEdit </buttom></form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['documento_proveedor']}'>iconDelete</button> </form></th>";
                 $table.="</tr>";
             }
             $table.="</table>";
@@ -123,13 +136,13 @@ class Proveedor{
                 <label for= '' >Nombre</label>
                 <input type= 'text' name='editNameProvider' value={$row['nombre_proveedor']}>
                 <label for= ''>Documento</label>
-                <input type= 'number' name='editIdProvider' value={$row['id_proveedor']}>
+                <input type= 'number' name='editIdProvider' value={$row['documento_proveedor']}>
                 <label for= ''>telefono</label>
                 <input type= 'number' name='editNumberProvider' value={$row['telefono']}>
                 <label for= ''>email</label>
                 <input type= 'email' name= 'editEmailProvider' value={$row['correo']} >
-                <button type='submit' value='Actualizar' name='{$row['id_proveedor']}'>Actualizar</button>
-                <button type='submit' value='CancelarActualizar' name= '{$row['id_proveedor']}'>Cancel</button>
+                <button type='submit' value='Actualizar' name='{$row['documento_proveedor']}'>Actualizar</button>
+                <button type='submit' value='CancelarActualizar' name= '{$row['documento_proveedor']}'>Cancel</button>
                 
                 </form>
                 </div>`
@@ -142,7 +155,7 @@ class Proveedor{
     }
     public static function updateProvider($conex,$oldIdProvider,$newIdProvider,$nombre_proveedor,$telefono,$email,$showMessagge){
         try{
-            $query = "UPDATE `proveedor` SET `id_proveedor`={$newIdProvider}, `nombre_proveedor`='{$nombre_proveedor}', `telefono`={$telefono}, `correo`='{$email}' WHERE `id_proveedor`={$oldIdProvider}";
+            $query = "UPDATE `proveedor` SET `documento_proveedor`={$newIdProvider}, `nombre_proveedor`='{$nombre_proveedor}', `telefono`={$telefono}, `correo`='{$email}' WHERE `documento_proveedor`={$oldIdProvider} AND `id_tienda` ={$_SESSION['store']}";
 
             $result =mysqli_query($conex,$query);
             if ($result && $showMessagge){
@@ -168,7 +181,7 @@ class Proveedor{
 }
 public static function deleteProvider($conex,$id){
     try{
-        $query = "DELETE FROM `proveedor` WHERE `id_proveedor`={$id}";
+        $query = "DELETE FROM `proveedor` WHERE `documento_proveedor`={$id} AND `id_tienda`= {$_SESSION['store']}";
 
         $result =mysqli_query($conex,$query);
         if ($result){

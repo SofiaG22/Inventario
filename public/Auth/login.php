@@ -9,11 +9,9 @@
              
             }else
             {
-               
                echo "<script>
                let email= document.getElementById('emailLogin');
                email.value=`{$_POST['emailLogin']}`
-             
                Swal.fire({
                 icon: 'error',
                 title: 'Completa los campos',
