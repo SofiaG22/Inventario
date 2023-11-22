@@ -1,3 +1,4 @@
+
 <?php
 class Administrador{
     private $name_admin ;
@@ -18,11 +19,23 @@ class Administrador{
         if(mysqli_num_rows($result)>0){
             $html="<div>";
             while($row=$result->fetch_array()){
-                $html.="<div>{$row['nombre_admin']}</div>";
-                $html.="<div>{$row['id_administrador']}</div>";
-                $html.="<div>{$row['cargo']}</div>";
-                $html.="<div>{$row['usuario']}</div>";
-                $html.="<div>{$row['nombre_tienda']}</div>";
+                $html.="<div class='mb-3'>
+                <h1 class='text-center'>Informacion Administrador</h1>
+                <h5 for='nameAdmin'>Nombre:</h5>
+                <p id='nameAdmin' name='nameAdmin'>{$row['nombre_admin']}</p>
+                </div>";
+                $html.="<div>
+                <h5 for='chargeAdmin'>Cargo:</h5>
+                <p id='chargeAdmin' name='chargeAdmin'>{$row['cargo']}</p>
+                </div>";
+                $html.="<div>
+                <h5 for='userAdmin'>Usuario:</h5>
+                <p id='userAdmin' name='userAdmin'>{$row['usuario']}</p>
+                </div>";
+                $html.="<div>
+                <h5 for='storeAdmin'>Tienda:</h5>
+                <p id='storeAdmin' name='storeAdmin'>{$row['nombre_tienda']}</p>
+                </div>";
             }
             $html.="</div>";
             echo $html;
