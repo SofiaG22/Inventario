@@ -1,4 +1,5 @@
-1.  decidir si cambiar le id de producto por un alfanumerico, asi dos tiendas 
+1.Decidir si cambiar le id de producto por un alfanumerico, asi dos tiendas 
 pueden tener el mismo id de producot sin problema. 
- 2. añadir al formulario de producto precio de compra a que provedor compro y cuanto compro
- 3.productos al darle añadir no deje sin haber proveedor
+2.productos al darle añadir no deje sin haber proveedor
+3.estilos tabla
+4.estlo profile
