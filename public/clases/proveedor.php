@@ -11,8 +11,10 @@ class Proveedor{
         $this->correo = $correo;
         $this->documento_proveedor = $documento_proveedor;
     }
+    //añadir provedor
     public function setProvider($conex){
         try {
+            //trae proveedor y si existe le dice que existe con su documento
             $proveedor = Proveedor::getProvider($conex,$this->documento_proveedor );
             if($proveedor){
                 echo "<script>
@@ -23,7 +25,7 @@ class Proveedor{
                      </script>";   
             }
             else{
-
+                //inserta provedor si no existe consus datos
                 $query=("INSERT INTO `proveedor`( `nombre_proveedor`, `telefono`, `correo`,`id_tienda`,`documento_proveedor`) VALUES ('{$this->name_provider}',{$this->telefono},'{$this->correo}', {$_SESSION['store']},{$this->documento_proveedor})");
                 $result =mysqli_query($conex,$query);
                 if ($result && mysqli_affected_rows($conex)>0){
@@ -38,13 +40,13 @@ class Proveedor{
                     echo "<script>
                         Swal.fire({
                             icon: 'error',
-                            title: 'Erroooor en esta consulta'
+                            title: 'Error en esta consulta'
                           });
                              </script>";   
                 }
             }
        
-        } catch (\Throwable $th) {
+        } catch (Exception $e) {
             echo "<script>
             Swal.fire({
                 icon: 'error',
@@ -53,10 +55,13 @@ class Proveedor{
                  </script>";   
         }
     }
+    //selecion de proveedores llena campo select con todos los proveedores
     public static function getProvidersSelect($conex){
         
         $query=("SELECT * FROM `proveedor` where id_tienda={$_SESSION['store']}");
         $result =mysqli_query($conex,$query);
+        //traigo el select de html y añado cada provedor como opcion
+        //si no hya sale no hay proveedores
         echo "<script>
         let select =document.getElementById('providerId');
         let option";
@@ -70,7 +75,6 @@ class Proveedor{
                  select.add(option);
                 </script>";
             }
-            return $result;
         }else{
             echo "
                 option= document.createElement('option');
@@ -80,6 +84,7 @@ class Proveedor{
                 </script>";
         }
     }
+    //trae proveedor para saber si existe
     public static function getProvider($conex,$id_provider){
         
         $query=("SELECT * FROM `proveedor` where id_tienda={$_SESSION['store']} and documento_proveedor=$id_provider");
@@ -89,19 +94,22 @@ class Proveedor{
             return $result;
         }
     }
+    //trae todos lo provedores y los muestra en la tabla
     public static function getProviders($conex){
         $query=("SELECT * FROM `proveedor` where id_tienda ={$_SESSION['store']}");
         $result = mysqli_query($conex,$query);
         if(mysqli_num_rows($result)>0){
-            $table="<table> <tr>";
+            $table="<table> <tr class='headerFila'>";
             $table.="<th>Documento</th>";
             $table.="<th>nombre</th>";
             $table.="<th>telefono</th>";
             $table.="<th>correo</th>";
+            $table.="<th>Editar</th>";
+            $table.="<th>Eliminar</th>";
             $table.="</tr>";
 
             while($row = $result->fetch_array()){
-                $table.="<tr>";
+                $table.="<tr class='fila'>";
                 $table.="<th>{$row['documento_proveedor']}</th>";
                 $table.="<th>{$row['nombre_proveedor']}</th>";
                 $table.="<th>{$row['telefono']}</th>";
@@ -123,8 +131,11 @@ class Proveedor{
                  </script>";   
         }
     }
+    //al dar clic en edita muestar formulario datos proveedor a editar 
     public static function setProviderInfo($conex,$id_provider){
+        //trae provveedor
         $result = Proveedor::getProvider($conex,$id_provider);
+        //crea alerta con los datos y da la opcion de actualizar
         while($row =$result->fetch_array()){
             echo "<script>
             Swal.fire({
@@ -151,8 +162,8 @@ class Proveedor{
                 
                     }
     
-    
     }
+    //actualiza info proceedor
     public static function updateProvider($conex,$oldIdProvider,$newIdProvider,$nombre_proveedor,$telefono,$email,$showMessagge){
         try{
             $query = "UPDATE `proveedor` SET `documento_proveedor`={$newIdProvider}, `nombre_proveedor`='{$nombre_proveedor}', `telefono`={$telefono}, `correo`='{$email}' WHERE `documento_proveedor`={$oldIdProvider} AND `id_tienda` ={$_SESSION['store']}";
@@ -179,6 +190,7 @@ class Proveedor{
     
 
 }
+//recibe id y elimina proveedor
 public static function deleteProvider($conex,$id){
     try{
         $query = "DELETE FROM `proveedor` WHERE `documento_proveedor`={$id} AND `id_tienda`= {$_SESSION['store']}";
@@ -202,8 +214,6 @@ public static function deleteProvider($conex,$id){
           });
              </script>";   
     }
-
-
 }
 
 }

@@ -3,7 +3,7 @@ include("../conexion/conexion.php");
 include("../clases/tienda.php");
 include("../clases/administrador.php");
 
-
+//metodo ingresa tiendas disponibles en el select
 try{
     Tienda::getStoresSelect($conex);
    
@@ -18,6 +18,7 @@ if(isset($_POST['submitSignUp'])){
      $admin->addAdmin($conex);
  
     }
+    //si campos vacios los rellena y muestra alerta completar
     else{
         echo "<script>
                let nameSign= document.getElementById('nameSign');

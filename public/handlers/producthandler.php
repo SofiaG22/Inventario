@@ -3,6 +3,7 @@ include('conexion/conexion.php');
 include('clases/producto.php');
 include('clases/proveedor.php');
 
+    //permite seleccionar proveedores existente en el selct
     $result = Proveedor::getProvidersSelect($conex);
 
 if( isset($_POST['submitProduct'])){
@@ -18,18 +19,19 @@ if( isset($_POST['submitProduct'])){
           });
              </script>";   
     }
-
 }
 
 if(isset($_POST['showProducts'])){
  Producto::getProducts($conex, $_SESSION['store']);
 }
-
+//verifica wur envia formulirio que no sea mostrar productos y añadir product
+//campo toma valor del ultimo boton enviado(click)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !isset($_POST['submitProduct'])) {
     foreach ($_POST as $valor => $campo) {
         $id=$valor;
-        // echo$campo .$valor;
+
     }
+    //el valor del boton es id producto a editar o  eliminar...
     if($campo =="Editar"){
         Producto::setProductInfo($conex,$_SESSION['store'],$id);
     }
@@ -39,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !
     elseif($campo =="Eliminar"){
         Producto::deleteProduct($conex, $id);
     }
+    //añadir cantidades a producto existente
     elseif($campo =="addQuantity"){
 
         Producto::updateQuantityproduct($conex, $id, $_POST['quantityEditProduct'],$_POST['priceProvierEditProduct'],$_POST['idProviderEditProduct']);
     }
-  
 }
 
 ?>

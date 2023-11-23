@@ -17,6 +17,7 @@ class Administrador{
     }
 
     public static function getAdminInfo($conex, $id){
+        //selecciona datos admin y tienda para mostrar la info del admin
         $query = ("SELECT administrador.*, tienda.nombre AS nombre_tienda FROM administrador JOIN tienda ON administrador.id_tienda = tienda.id_tienda WHERE administrador.id_administrador = {$id} AND administrador.id_tienda = {$_SESSION['store']}");
         $result = mysqli_query($conex, $query);
         if(mysqli_num_rows($result)>0){
@@ -45,6 +46,7 @@ class Administrador{
         }
     }
     public static function setDeleteAlert(){
+        //genera alerta indicando riesgo de eliminar cuenta con botones aceptar cancelar
         echo "<script> 
         Swal.fire({
             icon: 'warning',
@@ -62,16 +64,12 @@ class Administrador{
         </script>";
     }
     public  function addAdmin($conex){
-        // $name=$_POST['nameSign'];
-        // $charge=trim($_POST['chargeSign']);
-        // $email=trim($_POST['emailSign']);
-        // $password=md5($_POST['passwordSign']);
-        // $idStore=trim($_POST['idStoreSign']);
-        //verificar si el usuario no existe 
+        //verifica si existe usuario
         $query_user=("SELECT * FROM administrador WHERE usuario ='{$this->user}'");
         $result_user= mysqli_query($conex,$query_user);
         
         if(mysqli_num_rows($result_user)>0){
+            //si existe muestra alerta existe
             echo "<script>
                     Swal.fire({
                   icon: 'error',
@@ -80,11 +78,10 @@ class Administrador{
                   footer:'<a href=../index.php>Ir a inicio</a>'
                 });
                    </script>";
-
         }
         else{
+            //si no, lo agrega 
             try{
-
                 $query=("INSERT INTO `administrador`( `nombre_admin`, `cargo`, `usuario`, `contraseña`, `id_tienda`) VALUES ('{$this->name_admin}','{$this->charge}','{$this->user}','{$this->password}',{$this->id_store})");   
                 $result= mysqli_query($conex,$query);
                 if($result){
@@ -98,6 +95,7 @@ class Administrador{
                   }
             }
             catch(Exception $e){
+                //si hay error rellena todos los campos para no llenar otra vez
                 
                     echo "<script>
                     let nameSign= document.getElementById('nameSign');
@@ -115,7 +113,7 @@ class Administrador{
                         Swal.fire({
                     icon: 'error',
                     title: 'A ocurrido un error',
-                    text: 'no se encontro el id de tienda o hay un error en la conexion',
+                    text: 'hay un error en la conexion',
                     footer:'no tienes una tienda? <a href=tiendaForm.php>Creala</a>'
                 });
                    </script>";
@@ -124,11 +122,14 @@ class Administrador{
         }
     }
     public static function deleteAdmin($conex){
+        //crea contraseña y usuario aleatorio 
         $newPassword=md5(mt_rand(10000, 100000));
         $newUser=md5(mt_rand(10000, 100000));
+        //asigna los valores aleatorios a la cuenta que se elimina para no poder volver a ingresar
         $query =("UPDATE `administrador` SET `contraseña`='$newPassword',`usuario`='$newUser' WHERE id_administrador ={$_SESSION['idAdmin']} ");
         $result = mysqli_query($conex,$query);
         if ($result){
+            //elimina y cierra sesion, redirige inicio
             session_start();
             session_regenerate_id(true);
             session_destroy();
@@ -139,10 +140,13 @@ class Administrador{
     }
 
     public static function logIn($conex,$email,$password){
+        //Se recibe la contraseña y se encripta con md5
         $password= md5($password);
+        //se hace la cunsulta para verificar usuario y contraseña
         $query=("SELECT * FROM administrador WHERE usuario ='$email' and contraseña='$password'");
         $result =mysqli_query($conex,$query);
         if (mysqli_num_rows($result)>0){
+            //si es exitosa crea o inicia sesion y en la sesion guardamos datos importantes (id_tienda)
             while($row =$result->fetch_array()){
                 session_start();
                 $_SESSION['user']=$row['nombre_admin'];
@@ -153,6 +157,8 @@ class Administrador{
                 header("Location: index.php");
             }
         }
+        //si no es exitosa la consulta se llena el campo email con el valor ya ingresado
+        //muestra alerta de no encontro usuarioo
         else{
             echo "<script>
            //mantener email; 

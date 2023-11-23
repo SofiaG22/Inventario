@@ -9,6 +9,7 @@ if( isset($_POST['submitStore'])){
         $store->setStore($conex);
     }
     else{
+        //si los campos estan vacios los rellena con lo que ya tenia
         echo"<script>
         let nameStore= document.getElementById('nameStore');
         nameStore.value=`{$_POST['nameStore']}`

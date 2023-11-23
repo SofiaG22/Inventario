@@ -16,15 +16,17 @@ class Producto{
         $this->quantity_product = $quantity_product;
         $this->id_store = $id_store;
     }
-
+    //crea productos
     public function setProduct($conex,$precio_provider,$id_provider) {
         try{
+            //inserta producto
             $query=("INSERT INTO `producto`(`id_producto`, `nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ({$this->id_product},'{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
             $result =mysqli_query($conex,$query);
+            //inserta a compras
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
+            //si se inserta da alerta de creado cin exito
             if ($result && mysqli_affected_rows($conex)>0){
-                echo"llego aqui";
                 echo "<script>
                             Swal.fire({
                                 icon: 'success',
@@ -35,9 +37,10 @@ class Producto{
             }
 
         }
+        // si no se inserta da erro
         catch(Exception $e){
-            echo"esta entrando aal catch";
             $queryProduct=("SELECT * FROM `producto` WHERE id_producto={$this->id_product} and id_tienda={$this->id_store} ");
+            //verifica si el producto ya esta en la tienda y da la opcion de añadir mas unidades
             $result =mysqli_query($conex,$queryProduct);
             if(mysqli_num_rows($result)>0){
                 echo "<script>
@@ -56,11 +59,7 @@ class Producto{
                 </form>`
             });
             </script>";  
-            // $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`{$this->quantity_product}");
-            // $resultUpdate=mysqli_query($conex,$queryUpdate);
-            
-            // $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
-            // $resultBought=mysqli_query($conex,$queryBought);
+            //ya esta en uso el codigo
             }else{
                 echo "<script>
                 Swal.fire({
@@ -70,10 +69,9 @@ class Producto{
             });
             </script>";  
             }
-
-
         }
         }
+        //ejecuta en darle al producto ya esta registrado y actualiza unidades y añade nueva compra
         public static function updateQuantityproduct($conex,$id, $cantidad,$precio_provider,$id_provider){
             $queryUpdate=("UPDATE `producto` SET `prcant_existente`=`prcant_existente`+$cantidad where id_producto={$id}");
             $resultUpdate=mysqli_query($conex,$queryUpdate);
@@ -81,9 +79,11 @@ class Producto{
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$cantidad},{$precio_provider},{$id},{$id_provider},{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);            
         }
+        //trae todos los prodcutos y los muestar en una tabla
 public static function getProducts($conex, $store){
 
     try {
+        //titulo de los espacios tabla
         $table="<table >";
         $table.="<tr class='headerFila'>";
         $table.="<th id='nombretabla'> Nombre</th>";
@@ -96,6 +96,7 @@ public static function getProducts($conex, $store){
         $table.="</tr>";
         $query=(" SELECT * from `producto` where id_tienda =$store");
         $result =mysqli_query($conex,$query);
+        //si hay almenos un producto crea taba
         if (mysqli_num_rows($result)>0){
             
             while($row =$result->fetch_array()){
@@ -103,21 +104,18 @@ public static function getProducts($conex, $store){
                 $resultPriceBought =mysqli_query($conex,$queryPriceBought);
                 while($rowl= $resultPriceBought->fetch_array()){
                     $lastPriceBought= $rowl['precio_proveedor'];
-                    // echo $rowl['precio_proveedor'].$row['nombre_producto'];
 
                     }
-                echo $row['id_producto'];
+                    //relleno espacios tbla
                 $table.="<tr class='fila'>";
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
                 $table.="<th> {$lastPriceBought}</th>";
-
                 $table.="<th> {$row['prcant_existente']}</th>";
+
                 $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'><i class='editButton fa-solid fa-pen-to-square'></i></buttom></form></th>";
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form></th>";
-
-
                 $table.="</tr>";
             }
             $table.="<table>";
@@ -131,7 +129,7 @@ public static function getProducts($conex, $store){
           });
              </script>";   
         }
-    } catch (\Throwable $th) {
+    } catch (Exception $e) {
         echo "<script>
         Swal.fire({
             icon: 'error',
@@ -140,6 +138,7 @@ public static function getProducts($conex, $store){
              </script>";   
     }
 } 
+//verifica si un producto existe
 public  static function getProduct($conex, $store, $id){
     $query=(" SELECT * from `producto` where id_tienda = $store  and id_producto =$id" );
     $result =mysqli_query($conex,$query);
@@ -148,33 +147,12 @@ public  static function getProduct($conex, $store, $id){
         return $result;
     }
 }
+//informacion que se muestra al darle en el boton editar 
 public static function setProductInfo($conex,$id_store,$id_product){
     $result = Producto::getProduct($conex,$id_store,$id_product);
     while($row =$result->fetch_array()){
-        /*echo "<script>
-        Swal.fire({
-            title: 'Editar {$row['nombre_producto']}',
-            showCloseButton: true,
-            showConfirmButton: false,
-            html:`<div>
-            <form method='post'>
-            <label for= '' >Nombre</label>
-            <input type= 'text' name= 'editNameProduct' value={$row['nombre_producto']}>
-            <label for= ''>Código</label>
-            <input type= 'number' name= 'editNumberProduct' value={$row['id_producto']}>
-            <label for= ''>Descripción</label>
-            <input type= 'text ' name='editDescripcionProduct' value={$row['nombre_producto']}>
-            <label for= ''>Precio</label>
-            <input type= 'number' name= 'editpriceProduct' value={$row['precio_venta']}>
-            <label for= ''>Cantidad</label>
-            <input type= 'number' name= 'editQuantityProduct' value={$row['prcant_existente']} >
-            <button type='submit' value='Actualizar' name= '{$row['id_producto']}'>Actualizar</button>
-            <button type='submit' value='CancelarActualizar' name= '{$row['id_producto']}'>Cancel</button>
-            
-            </form>
-            </div>`
-            })
-        </script>";*/
+        //accesdo a los datps del producto
+        //creo alerta donde muestra datos y da la opcion de actualizar
         echo "<script>
         Swal.fire({
             title: 'Editar {$row['nombre_producto']}',
@@ -212,6 +190,7 @@ public static function setProductInfo($conex,$id_store,$id_product){
     }
 
 }
+//actualizar producto con los valores dados
 public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){
         try{
             $query = "UPDATE `producto` SET `id_producto`=$id_ProductEdit, `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
@@ -239,6 +218,7 @@ public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nomb
     
 
 }
+//elimina el producto con el id
 public static function deleteProduct($conex, $id){
     
     try{
@@ -263,9 +243,6 @@ public static function deleteProduct($conex, $id){
           });
              </script>";   
     }
-
-
-
 }
- }
+}
 ?>

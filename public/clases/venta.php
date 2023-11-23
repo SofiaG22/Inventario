@@ -72,17 +72,24 @@ public static function getSells($conex,$id_store){
     
 
 public static function setSell($conex,$id_store,$id_product,$quantitySell,$idClient,$name_admin){
+    //verifico si existe producto 
     $result = Producto::getProduct($conex,$id_store,$id_product);
     if($result){
+        //si existe se avanza en la venta 
         try{
             while($row= $result->fetch_array()){
+                //convierto arreglo para obtener datos
+                //verifica si lo que hay es amyor a lo que se vende
                 if($row['prcant_existente']>=$quantitySell){
-                    $cliente = Cliente::setIdSell($conex,$idClient);
+                    //si idCliente existe retorna id si no lo crea y lo retorna
+                    $cliente = Cliente::setIdCustomer($conex,$idClient);
                     $total=($row['precio_venta'] * $quantitySell);
                     $querySell=("INSERT INTO `venta`( `cant_venta`,`id_cliente`, `id_producto`, `id_tienda`,`total`,`id_administrador` ,`nombre_producto`) VALUES ($quantitySell,$cliente,$id_product,$id_store,$total,{$_SESSION['idAdmin']},'{$row['nombre_producto']}')");
                     $resultSell =mysqli_query($conex,$querySell);
                     if($resultSell){
+                        //verifico si fue exitosa y imprimo factura
                         $id_venta = mysqli_insert_id($conex);
+                        //actualiza cantidad unidades producot
                         Producto::updateProduct($conex,$id_product,$id_product,$row['nombre_producto'],$row['precio_venta'],$row['prcant_existente']-$quantitySell,$id_store,false);
                         echo "<script> 
                             Swal.fire({
@@ -105,8 +112,8 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                             });
                             </script>";
                          }
-               }
             }
+        }
         catch(Exception $e){
             
             echo "<script> 
@@ -128,6 +135,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
         }
     }
     public static function getTotalSell($conex, $store){
+        //trae y suma ventas dia y cantidad de regristro(venta)
         $query=("SELECT
         (SELECT SUM(total) FROM venta WHERE DATE(fecha) = CURDATE() AND id_tienda = $store) as total_suma,
         (SELECT COUNT(*) FROM venta WHERE DATE(fecha) = CURDATE() AND id_tienda = $store) as total_registros;");
@@ -149,10 +157,8 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                         });
                         </script>";
                 }
-                }
+            }
         }
-        
-
     }
     public static function getTotalSellAdmin($conex, $store){
         $query=("SELECT

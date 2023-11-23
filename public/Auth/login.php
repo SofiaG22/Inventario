@@ -1,4 +1,5 @@
 <?php
+    //incluye archivos
     include("conexion/conexion.php");
     include("clases/administrador.php");
         if(isset($_POST["submitLogin"])){

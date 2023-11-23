@@ -22,7 +22,7 @@ include("../validateSession/validatenTemplate.php")
                 <input type="password" class="form-control" id="vs" name="adressStore">
             </div>
 
-            <button type="submit" class="btn btn-primary mx-auto d-block" name="submitStore" onclick="(e)=>{e.preventDefault()}">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-primary mx-auto d-block" name="submitStore">Crear tienda</button>
     <?php
     include("../handlers/addStore.php");
     ?>

@@ -1,8 +1,10 @@
 <?php
 include("clases/venta.php");
 include('conexion/conexion.php');
+
 if (isset($_POST['submitSell'])){
     if(!empty($_POST['numberProduct']) && !empty($_POST['quantitySell'])&& !empty($_POST['idClient'])){
+        //trae el admini para mostrar en la factura 
         $query = ("SELECT * FROM administrador WHERE `id_administrador` ={$_SESSION['idAdmin']}");
         $result = mysqli_query($conex,$query);
         while($row= $result->fetch_array()){

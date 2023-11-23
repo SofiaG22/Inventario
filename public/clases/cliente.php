@@ -8,7 +8,7 @@ class Cliente{
          return $result;
      }
     }
-    public static function setIdSell($conex, $id){
+    public static function setIdCustomer($conex, $id){
         $result = Cliente::getId($conex, $id);
         if ($result){
             return $id;
