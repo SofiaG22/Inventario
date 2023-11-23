@@ -48,7 +48,7 @@ public static function getSells($conex,$id_store){
 
                 $table.="<th> {$row['total'] }</th>";
                 $table.="<th> {$row['fecha']} </th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_venta']}'>iconDelete</button> </form> </th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_venta']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form> </th>";
                 $table.="</tr>";
             }
             $table .="</table>";

@@ -1,6 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
 <!-- 
 <?php
 // include('validateSession/validateTemplate.php');
@@ -58,14 +57,12 @@ $_SESSION['filaBought']=10;
                     <input type="number" class="form-control" id="numberProduct" name="numberProduct">
                 </div>
 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="descripcionProduct" class="form-label">Descripción</label>
                     <input type="text" class="form-control" id="descripcionProduct" name="descripcionProduct">
-                </div>
-
-
+                </div> -->
                 <div class="mb-3">
-            <label for="priceBought" class="form-label">Precio Compra</label>
+                    <label for="priceBought" class="form-label">Precio Compra</label>
             <input type="number" class="form-control" id="priceBought" name="priceBought">
         </div>
         <div class="mb-3">
@@ -80,8 +77,8 @@ $_SESSION['filaBought']=10;
             <label for="providerId" class="form-label">Proveedor Compra</label>
             <select class="form-control" id="providerId" name="providerId"></select>
         </div>
-
-                <button type="submit" class="btn btn-primary mx-auto d-block" name="submitProduct">Añadir</button>
+            
+        <button type="submit" class="btn btn-primary mx-auto d-block" name="submitProduct">Añadir</button>
             </form>
         </div>
     </div>

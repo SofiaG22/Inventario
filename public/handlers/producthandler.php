@@ -6,8 +6,8 @@ include('clases/proveedor.php');
     $result = Proveedor::getProvidersSelect($conex);
 
 if( isset($_POST['submitProduct'])){
-    if( !empty($_POST['numberProduct']) && !empty($_POST['nameProduct'])  && !empty($_POST['descripcionProduct'])&& !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
-        $producto =new Producto($_POST['numberProduct'],$_POST['nameProduct'],$_POST['descripcionProduct'],$_POST['priceProduct'],$_POST['quantityProduct'],$_SESSION['store']);
+    if( !empty($_POST['numberProduct']) && !empty($_POST['nameProduct']) && !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
+        $producto =new Producto($_POST['numberProduct'],$_POST['nameProduct'],'y',$_POST['priceProduct'],$_POST['quantityProduct'],$_SESSION['store']);
         $producto->setProduct($conex,$_POST['priceBought'],$_POST['providerId']);
     }
     else{

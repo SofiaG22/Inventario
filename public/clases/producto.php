@@ -24,6 +24,7 @@ class Producto{
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
             if ($result && mysqli_affected_rows($conex)>0){
+                echo"llego aqui";
                 echo "<script>
                             Swal.fire({
                                 icon: 'success',
@@ -35,6 +36,7 @@ class Producto{
 
         }
         catch(Exception $e){
+            echo"esta entrando aal catch";
             $queryProduct=("SELECT * FROM `producto` WHERE id_producto={$this->id_product} and id_tienda={$this->id_store} ");
             $result =mysqli_query($conex,$queryProduct);
             if(mysqli_num_rows($result)>0){
@@ -83,7 +85,7 @@ public static function getProducts($conex, $store){
 
     try {
         $table="<table >";
-        $table.="<tr>";
+        $table.="<tr class='headerFila'>";
         $table.="<th id='nombretabla'> Nombre</th>";
         $table.="<th> Codigo</th>";
         $table.="<th> Precio</th>";
@@ -105,15 +107,15 @@ public static function getProducts($conex, $store){
 
                     }
                 echo $row['id_producto'];
-                $table.="<tr>";
+                $table.="<tr class='fila'>";
                 $table.="<th> {$row['nombre_producto']}</th>";
                 $table.="<th> {$row['id_producto']}</th>";
                 $table.="<th> {$row['precio_venta']}</th>";
                 $table.="<th> {$lastPriceBought}</th>";
 
                 $table.="<th> {$row['prcant_existente']}</th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'>iconEdit </buttom></form></th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'>iconDelete</button> </form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['id_producto']}'><i class='editButton fa-solid fa-pen-to-square'></i></buttom></form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form></th>";
 
 
                 $table.="</tr>";
@@ -149,7 +151,7 @@ public  static function getProduct($conex, $store, $id){
 public static function setProductInfo($conex,$id_store,$id_product){
     $result = Producto::getProduct($conex,$id_store,$id_product);
     while($row =$result->fetch_array()){
-        echo "<script>
+        /*echo "<script>
         Swal.fire({
             title: 'Editar {$row['nombre_producto']}',
             showCloseButton: true,
@@ -171,11 +173,43 @@ public static function setProductInfo($conex,$id_store,$id_product){
             
             </form>
             </div>`
-          })
-             </script>";   
+            })
+        </script>";*/
+        echo "<script>
+        Swal.fire({
+            title: 'Editar {$row['nombre_producto']}',
+            showCloseButton: true,
+            showConfirmButton: false,
+            html: `<div class='container'>
+                <form method='post'>
+                    <div class='form-group'>
+                        <label for='editNameProduct'>Nombre</label>
+                        <input type='text' class='form-control' name='editNameProduct' value='{$row['nombre_producto']}'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='editNumberProduct'>Código</label>
+                        <input type='number' class='form-control' name='editNumberProduct' value='{$row['id_producto']}'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='editDescripcionProduct'>Descripción</label>
+                        <input type='text' class='form-control' name='editDescripcionProduct' value='{$row['nombre_producto']}'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='editpriceProduct'>Precio</label>
+                        <input type='number' class='form-control' name='editpriceProduct' value='{$row['precio_venta']}'>
+                    </div>
+                    <div class='form-group'>
+                        <label for='editQuantityProduct'>Cantidad</label>
+                        <input type='number' class='form-control' name='editQuantityProduct' value='{$row['prcant_existente']}'>
+                    </div>
+                    <button type='submit' class='btn btn-primary' value='Actualizar' name='{$row['id_producto']}'>Actualizar</button>
+                    <button type='submit' class='btn btn-secondary' value='CancelarActualizar' name='{$row['id_producto']}'>Cancelar</button>
+                </form>
+            </div>`
+        })
+      </script>";   
             
-                }
-
+    }
 
 }
 public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){

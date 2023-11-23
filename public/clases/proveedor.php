@@ -106,8 +106,8 @@ class Proveedor{
                 $table.="<th>{$row['nombre_proveedor']}</th>";
                 $table.="<th>{$row['telefono']}</th>";
                 $table.="<th>{$row['correo']}</th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['documento_proveedor']}'>iconEdit </buttom></form></th>";
-                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['documento_proveedor']}'>iconDelete</button> </form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Editar' name='{$row['documento_proveedor']}'><i class='editButton fa-solid fa-pen-to-square'></i></buttom></form></th>";
+                $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['documento_proveedor']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form></th>";
                 $table.="</tr>";
             }
             $table.="</table>";

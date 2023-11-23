@@ -1,0 +1,54 @@
+button{
+    border:none;
+    background-color: transparent;
+}
+
+.editButton{
+    color: rgb(10, 175, 43);
+    font-size: 120%;
+    padding-top: 10px;
+}
+.deleteButton{
+    color: rgb(255, 0, 0);
+    font-size: 120%;
+    padding-top: 10px;
+}
+.deleteAccount{
+    background-color: rgb(255, 0, 0);
+    color:white;
+}
+.headerFila{
+    background-color: rgb(49, 138, 228);
+    color: white;
+}
+.fila:nth-child(odd){
+    background-color:rgb(237, 231, 231);
+}
+table{
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 7%;
+    position: fixed;
+    top: 20%;
+    z-index: 500;
+}
+th{
+    border: 1px solid lightgrey;
+    text-align: center;
+}
+.daySell{
+    background-color:rgb(13, 195, 62);
+    color: white;
+    font-size: 150%;
+}
+.totalSellDay{
+    background-color:rgb(227, 155, 12);
+    color: white;
+    font-size: 150%;
+}
+.totalsellAdmin{
+    background-color:rgb(227, 12, 209);
+    color: white;
+    font-size: 150%;
+}
+
