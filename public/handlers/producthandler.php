@@ -5,7 +5,17 @@ include('clases/proveedor.php');
 
     //permite seleccionar proveedores existente en el selct
     $result = Proveedor::getProvidersSelect($conex);
-
+    //Controla cuantas filas se muestran en los resultados
+    if(isset($_POST["showMore"])){
+        Producto::setShowMore();
+        Producto::getProducts($conex, $_SESSION['store']);
+    
+    }
+    if(isset($_POST["showLess"])){
+        Producto::setShowLess();
+        Producto::getProducts($conex, $_SESSION['store']);
+    
+    }
 if( isset($_POST['submitProduct'])){
     if( !empty($_POST['numberProduct']) && !empty($_POST['nameProduct']) && !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
         $producto =new Producto($_POST['numberProduct'],$_POST['nameProduct'],'y',$_POST['priceProduct'],$_POST['quantityProduct'],$_SESSION['store']);

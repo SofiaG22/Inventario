@@ -6,6 +6,7 @@ include('template/navbar.php');
 //controla numero de fialas mostradas en resultado
 $_SESSION['filaSell']=10;
 $_SESSION['filaBought']=10;
+$_SESSION['rowProduct']=10;
 ?>
 
 <div class="container mt-5">

@@ -78,8 +78,21 @@ class Producto{
             $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$cantidad},{$precio_provider},{$id},{$id_provider},{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);            
         }
+
+        public static function setShowMore(){
+            $_SESSION['rowProduct']+=10;
+        }
+        //quita 10 filas al resultado 
+        public static function setShowLess(){
+            $_SESSION['rowProduct']-=10;
+            if($_SESSION['rowProduct']<10){
+            $_SESSION['rowProduct']=10;
+        
+            }
+        }
         //trae todos los prodcutos y los muestar en una tabla
 public static function getProducts($conex, $store){
+
 
     try {
         //titulo de los espacios tabla
@@ -93,17 +106,18 @@ public static function getProducts($conex, $store){
         $table.="<th> Editar</th>";
         $table.="<th> Eliminar</th>";
         $table.="</tr>";
-        $query=(" SELECT * from `producto` where id_tienda =$store");
-        $result =mysqli_query($conex,$query);
+        $query=("SELECT * FROM `producto` WHERE (`id_tienda`) =$store LIMIT 0, {$_SESSION['rowProduct']} ;");
+        $result = mysqli_query($conex,$query);
+        
         //si hay almenos un producto crea taba
         if (mysqli_num_rows($result)>0){
-            
+
+            //ARREGLO PARA PODER ITERAR SOBRE CADA UNA DE LOS PRODUCTOS 
             while($row =$result->fetch_array()){
                 $queryPriceBought=("SELECT *  FROM `compra` WHERE id_producto={$row['id_producto']} ORDER BY `fecha` DESC LIMIT 1;");
                 $resultPriceBought =mysqli_query($conex,$queryPriceBought);
                 while($rowl= $resultPriceBought->fetch_array()){
                     $lastPriceBought= $rowl['precio_proveedor'];
-
                     }
                     //relleno espacios tbla
                 $table.="<tr class='fila'>";
@@ -118,6 +132,16 @@ public static function getProducts($conex, $store){
                 $table.="</tr>";
             }
             $table.="<table>";
+            $queryTotal=("SELECT * FROM `producto` WHERE (`id_tienda`) =$store;");
+            $resultTotal = mysqli_query($conex,$queryTotal);
+            //si son mas de 10 añade boton ver mas
+            if(mysqli_num_rows($resultTotal)>$_SESSION['rowProduct']){
+                $table.="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMore'>Cargar Más</button> </form>";
+            }
+            //si son mas de 20 añade boton ver menos
+            if($_SESSION['rowProduct']>20){
+                $table.="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLess'>Cargar Menos</button> </form>";
+            }
             echo $table;
         }
         else{
@@ -136,9 +160,10 @@ public static function getProducts($conex, $store){
           });
              </script>";   
     }
-} 
+}
+
 //verifica si un producto existe
-public  static function getProduct($conex, $store, $id){
+public static function getProduct($conex, $store, $id){
     $query=(" SELECT * from `producto` where id_tienda = $store  and id_producto =$id" );
     $result =mysqli_query($conex,$query);
     if($result && mysqli_num_rows($result) > 0){

@@ -30,19 +30,19 @@ public static function getSells($conex,$id_store){
         $resultTotal = mysqli_query($conex,$queryTotal);
         if($result && mysqli_num_rows($result)>0){
             $table ="<table>";
-            $table.="<tr>";
-            $table.="<th> ID DE VENTA </th>";
-            $table.="<th> CLIENTE </th>";
-            $table.="<th> CANTIDAD </th>";
-            $table.="<th> CODIGO </th>";
-            $table.="<th> NOMBRE PROD </th>";
-            $table.="<th> TOTAL </th>";
-            $table.="<th> FECHA </th>";
+            $table.="<tr class='headerFila'>" ;
+            $table.="<th> ID de Venta </th>";
+            $table.="<th> Cliente </th>";
+            $table.="<th> Cantidad </th>";
+            $table.="<th> Codigo </th>";
+            $table.="<th> Nombre PROD </th>";
+            $table.="<th> Total </th>";
+            $table.="<th> Fecha </th>";
             $table.="<th> Eliminar</th>";
             $table.="</tr>";
 
             while($row =$result->fetch_array()){
-                $table.="<tr>";
+                $table.="<tr class='fila'>";
                 $table.="<th> {$row['id_venta']} </th>";
                 $table.="<th> {$row['id_cliente']}  </th>";
                 $table.="<th> {$row['cant_venta']} </th>";
@@ -56,10 +56,10 @@ public static function getSells($conex,$id_store){
             }
             $table .="</table>";
             if(mysqli_num_rows($resultTotal)>$_SESSION['filaSell']){
-                $table .="<form method='post'><button type='submit' name='showMore'>Cargar Más</button> </form>";
+                $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMore'>Cargar Más</button> </form>";
             }
             if($_SESSION['filaSell']>20){
-                $table .="<form method='post'><button type='submit' name='showLess'>Cargar Menos</button> </form>";
+                $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLess'>Cargar Menos</button> </form>";
             }
             echo $table;
         }

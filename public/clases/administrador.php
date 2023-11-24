@@ -156,6 +156,7 @@ class Administrador{
                 $_SESSION['store']=$row['id_tienda'];
                 $_SESSION['filaSell']=10;
                 $_SESSION['filaBought']=10;
+                $_SESSION['rowProduct']=10;
                 $_SESSION['idAdmin']=$row['id_administrador'];
                 header("Location: index.php");
             }

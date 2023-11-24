@@ -51,11 +51,11 @@ class Compra{
                 $resultTotal = mysqli_query($conex,$queryTotal);
                 //si son mas de 10 añade boton ver mas
                 if(mysqli_num_rows($resultTotal)> $_SESSION['filaBought']){
-                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block' name='showMoreBought'>Cargar Más</button> </form>";
+                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMoreBought'>Cargar Más</button> </form>";
                 }
                 //si son mas de 20 añade boton ver menos
                 if($_SESSION['filaBought']>=20){
-                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block' name='showLessBought'>Cargar Menos</button> </form>";
+                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLessBought'>Cargar Menos</button> </form>";
                 }
                 echo $table;
             }

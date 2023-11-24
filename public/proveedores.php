@@ -5,6 +5,7 @@ include('validateSession/validateTemplate.php');
 
 include('template/navbar.php');
 $_SESSION['filaSell']=10;
+$_SESSION['rowProduct']=10;
 ?>
 
 <div class="container mt-5">

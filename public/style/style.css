@@ -32,6 +32,7 @@ table{
     border-collapse: collapse;
     width: 80%;
     margin-left: 7%;
+    margin-bottom: 5vh;
 }
 th{
     border: 1px solid lightgrey;
@@ -171,7 +172,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    margin-bottom: 5vh;
 }
 .divSells button{
     color:white;
