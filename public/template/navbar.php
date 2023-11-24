@@ -39,7 +39,7 @@
 
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar">
-    <i class="fa fa-book logo" ></i>
+    <a href="index.php"><i class="fa-solid fa-layer-group logo"></i>  Inventario</a>
     <ul class="sidebarUl">
         <li><a href="index.php"><i class="fa-solid fa-house"></i>  Inicio</a></li>
         <li><a href="vender.php"><i class="fa-solid fa-cart-shopping"></i>  Vender</a></li>
@@ -64,11 +64,8 @@
                         <button type="submit" name="closeSession" value="Cerrar sesión" class="">Cerrar Sesión</button>
                     </form>
             </li>
-
-        </ul>
-        
+        </ul>        
     </nav>
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

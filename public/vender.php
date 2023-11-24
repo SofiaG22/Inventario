@@ -32,7 +32,7 @@ $_SESSION['filaBought']=10;
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mx-auto d-block" name="submitSell">Añadir</button>
+                <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #58158F;" name="submitSell">Añadir</button>
             </form>
         </div>
     </div>

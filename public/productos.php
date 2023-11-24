@@ -42,7 +42,7 @@ $_SESSION['filaBought']=10;
             <select class="form-control" id="providerId" name="providerId"></select>
         </div>
             
-        <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #4C1B8F;" name="submitProduct">Añadir</button>
+        <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #58158F;" name="submitProduct">Añadir</button>
             </form>
         </div>
     </div>

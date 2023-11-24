@@ -28,7 +28,7 @@ $_SESSION['filaSell']=10;
 
         </div>
 
-        <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #4C1B8F;" name="submitProveedor" >Añadir</button>
+        <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #58158F;" name="submitProveedor" >Añadir</button>
     </form>
 </div>
 

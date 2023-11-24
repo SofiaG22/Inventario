@@ -97,7 +97,6 @@ body {
     background-color: rgb(88, 21, 143);
     padding-top: 20px;
     padding-left: 05px;
-    text-align: center;
     color: white;
     transition-property: left;
     transition-duration:0.5s ;
@@ -113,7 +112,7 @@ body {
 }
 
 .sidebar a:hover {
-    color:lightblue;
+    color:rgb(214, 192, 239);
 }
 .sidebar li{
     text-align: left;
@@ -140,13 +139,17 @@ body {
     
 }
 .navUl li form button{
-    background-color: rgb(255, 255, 255);
-    color:black;
+    background-color: #4C1B8F;
+    color:white;
     float:right;
+    margin-top: 6px;
+    border: 0px;
+    border-radius: 5px;
+
 }
 .sidebarUl{
     list-style-type: none;
 }
 .logo{
-    font-size: 5vw;
+    font-size: 3vw;
 }
