@@ -45,8 +45,57 @@ th{
     font-size: 150%;
 }
 .totalsellAdmin{
-    background-color:rgb(227, 12, 209);
+    background-color:rgb(139, 76, 134);
     color: white;
     font-size: 150%;
 }
 
+#sidebar{
+    transition-property: left;
+    transition-duration: 0.5;
+}
+
+body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -250px;
+    background-color: #111;
+    padding-top: 20px;
+    padding-left: 10px;
+    color: white;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.navbar {
+    background-color: #111 !important;
+    padding: 15px;
+    margin-left: 250px;
+}
+
+.navbar-toggler {
+    color: white;
+    border: none;
+}
+.content{
+    background-color: black;
+}

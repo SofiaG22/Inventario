@@ -10,9 +10,11 @@ class Venta{
         $this->cant_venta = $cant_venta;
         $this->fecha = $fecha;
     }
+//añade 10 filas al resultado 
 public static function setShowMore(){
     $_SESSION['filaSell']+=10;
 }
+//quita 10 filas al resultado 
 public static function setShowLess(){
     $_SESSION['filaSell']-=10;
     if($_SESSION['filaSell']<10){
@@ -20,6 +22,7 @@ public static function setShowLess(){
 
     }
 }
+// trae todas las ventas y las meustra en una tabla
 public static function getSells($conex,$id_store){
         $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']} LIMIT 0, {$_SESSION['filaSell']} ;");
         $result = mysqli_query($conex,$query);

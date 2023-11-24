@@ -22,9 +22,7 @@ class Compra{
             //trae compras por 10
             $query=("SELECT * FROM `compra` WHERE  (`id_tienda`) =$id_store LIMIT 0, {$_SESSION['filaBought']} ;");
             $result = mysqli_query($conex,$query);
-            //trae todas las compras
-            $queryTotal=("SELECT * FROM `compra` WHERE (`id_tienda`) =$id_store;");
-            $resultTotal = mysqli_query($conex,$queryTotal);
+           
             if($result && mysqli_num_rows($result)>0){
                 $table ="<table>";
                 $table.= "<tr>";
@@ -48,6 +46,9 @@ class Compra{
                     $table.="</tr>";
                 }
                 $table .="</table>";
+                 //trae todas las compras
+                $queryTotal=("SELECT * FROM `compra` WHERE (`id_tienda`) =$id_store;");
+                $resultTotal = mysqli_query($conex,$queryTotal);
                 //si son mas de 10 añade boton ver mas
                 if(mysqli_num_rows($resultTotal)> $_SESSION['filaBought']){
                     $table .="<form method='post'><button type='submit' name='showMoreBought'>Cargar Más</button> </form>";
