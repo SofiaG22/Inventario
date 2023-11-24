@@ -78,3 +78,75 @@ th{
     border-radius: 5px;
     margin-left: 10px;
 }
+
+
+body {
+    margin-top: 0px;
+    font-family: "Lato", sans-serif;
+    transition-property: margin;
+    transition-duration:0.5s ;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -250px;
+    background-color: rgb(88, 21, 143);
+    padding-top: 20px;
+    padding-left: 05px;
+    text-align: center;
+    color: white;
+    transition-property: left;
+    transition-duration:0.5s ;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 19px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color:lightblue;
+}
+.sidebar li{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.navbar {
+    background-color: #111 !important;
+    padding: 15px;
+    
+}
+
+.navbar-toggle i{
+    border: none;
+    font-size: 125%;
+    color: white !important;
+}
+.content{
+    background-color: black;
+}
+.navUl{
+    z-index: 10;
+    list-style-type: none;
+    
+}
+.navUl li form button{
+    background-color: rgb(255, 255, 255);
+    color:black;
+    float:right;
+}
+.sidebarUl{
+    list-style-type: none;
+}
+.logo{
+    font-size: 5vw;
+}
