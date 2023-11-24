@@ -33,7 +33,6 @@ class Producto{
                                 title: 'Producto {$this->name_product} creado con  exito'
                           });
                                  </script>";   
-
             }
 
         }
@@ -54,8 +53,8 @@ class Producto{
                 <input type='number' class='d-none'value='{$this->quantity_product}' name='quantityEditProduct'>
                 <input type='number'class='d-none' value='{$id_provider}' name='idProviderEditProduct'>
                 <input type='number' class='d-none' value='{$precio_provider}' name='priceProvierEditProduct'>
-                <button type='submit' name='cancel'>Descartar</button>
-                <button type='submit' value='addQuantity' name='{$this->id_product}'>Agregar</button>
+                <button type='submit' class='btn btn-secondary' name='cancel'>Descartar</button>
+                <button type='submit' class='btn btn-primary' value='addQuantity' name='{$this->id_product}'>Agregar</button>
                 </form>`
             });
             </script>";  
