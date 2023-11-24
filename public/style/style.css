@@ -38,17 +38,17 @@ th{
     text-align: center;
 }
 .daySell{
-    background-color:rgb(13, 195, 62);
+    background-color:black;
     color: white;
     font-size: 150%;
 }
 .totalSellDay{
-    background-color:rgb(227, 155, 12);
+    background-color:darkblue;
     color: white;
     font-size: 150%;
 }
 .totalsellAdmin{
-    background-color:rgb(227, 12, 209);
+    background-color:darkcyan;
     color: white;
     font-size: 150%;
 }
@@ -149,4 +149,33 @@ body {
 }
 .logo{
     font-size: 5vw;
+}
+.divSells{
+    width: 15vw;
+    height: 10vw;
+    margin-left: 2vw;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    
+}
+.divSells:hover{
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+.formSells{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.divSells button{
+    color:white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 1.8vw;
+    font-weight: 600;
+    padding-top: 15%;
+    font-style: italic;
 }
