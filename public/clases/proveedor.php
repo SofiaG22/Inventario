@@ -64,11 +64,12 @@ class Proveedor{
         //si no hya sale no hay proveedores
         echo "<script>
         let select =document.getElementById('providerId');
-        let option";
+        let option </script>";
        
         if (mysqli_num_rows($result)>0){
             while($row =$result->fetch_array()){
                 echo "
+                <script>
                 option= document.createElement('option');
                  option.value ={$row['documento_proveedor']};
                  option.text = '{$row['nombre_proveedor']}';
@@ -77,6 +78,7 @@ class Proveedor{
             }
         }else{
             echo "
+            <script>
                 option= document.createElement('option');
                  option.value ='nP';
                 option.text = 'Añade un proveedor';
@@ -144,23 +146,32 @@ class Proveedor{
                 showConfirmButton: false,
                 html:`<div>
                 <form method='post'>
-                <label for= '' >Nombre</label>
-                <input type= 'text' name='editNameProvider' value={$row['nombre_proveedor']}>
-                <label for= ''>Documento</label>
-                <input type= 'number' name='editIdProvider' value={$row['documento_proveedor']}>
-                <label for= ''>telefono</label>
-                <input type= 'number' name='editNumberProvider' value={$row['telefono']}>
-                <label for= ''>email</label>
-                <input type= 'email' name= 'editEmailProvider' value={$row['correo']} >
-                <button type='submit' value='Actualizar' name='{$row['documento_proveedor']}'>Actualizar</button>
-                <button type='submit' value='CancelarActualizar' name= '{$row['documento_proveedor']}'>Cancel</button>
+                    <div class='mb-3'>
+                        <label for= 'editNameProvider' class='form-label'>Nombre</label>
+                        <input type= 'text' class='form-control' name='editNameProvider' value={$row['nombre_proveedor']}>
+                    </div>
+                    <div class='mb-3'>
+                        <label for= 'editIdProvider' class='form-label'>Documento</label>
+                        <input type= 'number' class='form-control' name='editIdProvider' value={$row['documento_proveedor']}>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='editNumberProvider' class='form-label'>telefono</label>
+                        <input type= 'number' class='form-control' name='editNumberProvider' value={$row['telefono']}>
+                    </div>
+                    <div class='mb-3'>
+                        <label for= 'editEmailProvider' class='form-label'>email</label>
+                        <input type= 'email' class='form-control' name= 'editEmailProvider' value={$row['correo']} >
+                    </div>
+                    <button type='submit' class='btn btn-primary' value='Actualizar' name='{$row['documento_proveedor']}'>Actualizar</button>
+                    <button type='submit' class='btn btn-secondary' value='CancelarActualizar' name= '{$row['documento_proveedor']}'>Cancel</button>
                 
                 </form>
                 </div>`
-              })
-                 </script>";   
+            });
+            
+            </script>";   
                 
-                    }
+        }
     
     }
     //actualiza info proceedor

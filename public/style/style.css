@@ -49,4 +49,6 @@ th{
     color: white;
     font-size: 150%;
 }
-
+.EditDeleteProduct{
+    background-color: dodgerblue !important;
+}

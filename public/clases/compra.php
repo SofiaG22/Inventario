@@ -27,7 +27,7 @@ class Compra{
             $resultTotal = mysqli_query($conex,$queryTotal);
             if($result && mysqli_num_rows($result)>0){
                 $table ="<table>";
-                $table.= "<tr>";
+                $table.= "<tr class='headerFila'>";
                 $table.="<th> ID DE COMPRA </th>";
                 $table.="<th> CANTIDAD COMPRADA</th>";
                 $table.="<th> PRECIO DE PRODUCTO </th>";
@@ -38,7 +38,7 @@ class Compra{
 
                 //ARREGLO PARA PODER ITERAR SOBRE CADA UNA DE LAS COMPRAS 
                 while($row =$result->fetch_array()){
-                    $table.= "<tr>";
+                    $table.= "<tr class='fila'>";
                     $table.="<th> {$row['id_compra']} </th>";
                     $table.="<th> {$row['cant_compra']} </th>";
                     $table.="<th> {$row['precio_proveedor']}  </th>";
