@@ -28,12 +28,12 @@ class Compra{
             if($result && mysqli_num_rows($result)>0){
                 $table ="<table>";
                 $table.= "<tr class='headerFila'>";
-                $table.="<th> ID DE COMPRA </th>";
-                $table.="<th> CANTIDAD COMPRADA</th>";
-                $table.="<th> PRECIO DE PRODUCTO </th>";
-                $table.="<th> CODIGO DE PRODUCTO</th>";
-                $table.="<th> PROVEEDOR </th>";
-                $table.="<th> FECHA </th>";
+                $table.="<th> ID Compra </th>";
+                $table.="<th> Cantidad Comprada</th>";
+                $table.="<th> Precio De Producto </th>";
+                $table.="<th> Codigo De Producto</th>";
+                $table.="<th> Proveedor </th>";
+                $table.="<th> Fecha </th>";
                 $table.="</tr>";
 
                 //ARREGLO PARA PODER ITERAR SOBRE CADA UNA DE LAS COMPRAS 
@@ -50,11 +50,11 @@ class Compra{
                 $table .="</table>";
                 //si son mas de 10 añade boton ver mas
                 if(mysqli_num_rows($resultTotal)> $_SESSION['filaBought']){
-                    $table .="<form method='post'><button type='submit' name='showMoreBought'>Cargar Más</button> </form>";
+                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block' name='showMoreBought'>Cargar Más</button> </form>";
                 }
                 //si son mas de 20 añade boton ver menos
                 if($_SESSION['filaBought']>=20){
-                    $table .="<form method='post'><button type='submit' name='showLessBought'>Cargar Menos</button> </form>";
+                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block' name='showLessBought'>Cargar Menos</button> </form>";
                 }
                 echo $table;
             }

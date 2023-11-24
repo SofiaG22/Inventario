@@ -28,13 +28,13 @@ $_SESSION['filaSell']=10;
 
         </div>
 
-        <button type="submit" class="btn btn-primary mx-auto d-block" name="submitProveedor" >Añadir</button>
+        <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #4C1B8F;" name="submitProveedor" >Añadir</button>
     </form>
 </div>
 
 <form action="" method="post">
-   <button type="input" name="showProviders">Ver proveedores</button>
-   <button type="input" name="showBoughts">Ver historial de compras</button>
+   <button type="input" class="showProviders" name="showProviders">Ver proveedores</button>
+   <button type="input" class="showHistorialBought" name="showBoughts">Ver historial de compras</button>
 
 </form>
 

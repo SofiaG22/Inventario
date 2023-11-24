@@ -24,7 +24,10 @@ class Administrador{
             $html="<div>";
             while($row=$result->fetch_array()){
                 $html.="<div class='mb-3'>
-                <h1 class='text-center'>Informacion Administrador</h1>
+                <h1 class='text-center' >Informacion Administrador</h1>
+                </div>";
+                
+                $html.="<div class='mb-3'>
                 <h5 for='nameAdmin'>Nombre:</h5>
                 <p>{$row['nombre_admin']}</p>
                 </div>";

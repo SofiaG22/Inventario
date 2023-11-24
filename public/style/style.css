@@ -16,10 +16,14 @@ button{
 .deleteAccount{
     background-color: rgb(255, 0, 0);
     color:white;
+    border: 0px;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 .headerFila{
-    background-color: rgb(49, 138, 228);
+    background-color: lightslategray;
     color: white;
+    font-size: 110%;
 }
 .fila:nth-child(odd){
     background-color:rgb(237, 231, 231);
@@ -28,7 +32,6 @@ table{
     border-collapse: collapse;
     width: 80%;
     margin-left: 7%;
-
 }
 th{
     border: 1px solid lightgrey;
@@ -50,5 +53,28 @@ th{
     font-size: 150%;
 }
 .EditDeleteProduct{
-    background-color: dodgerblue !important;
+    background-color: lightslategray;
+    color: white;
+    font-size: 120%;
+    padding: 6px;
+    border: 0px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.showHistorialBought{
+    background-color: lightslategray;
+    color: white;
+    font-size: 120%;
+    padding: 6px;
+    border: 0px;
+    border-radius: 5px;
+}
+.showProviders{
+    background-color: lightslategray;
+    color: white;
+    font-size: 120%;
+    padding: 6px;
+    border: 0px;
+    border-radius: 5px;
+    margin-left: 10px;
 }
