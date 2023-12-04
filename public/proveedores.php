@@ -39,6 +39,9 @@ $_SESSION['rowProduct']=10;
 
 </form>
 
+<script src="js/providerTable.js"></script>
+<script src="js/boughtTable.js"></script>
+
 <?php
 include("handlers/providerHandler.php");
 ?>

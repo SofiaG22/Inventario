@@ -101,7 +101,7 @@ class Proveedor{
         $query=("SELECT * FROM `proveedor` where id_tienda ={$_SESSION['store']}");
         $result = mysqli_query($conex,$query);
         if(mysqli_num_rows($result)>0){
-            $table="<table> <tr class='headerFila'>";
+            $table="<table id='providerTable'> <thead> <tr class='headerFila'>";
             $table.="<th>Documento</th>";
             $table.="<th>nombre</th>";
             $table.="<th>telefono</th>";
@@ -109,6 +109,8 @@ class Proveedor{
             $table.="<th>Editar</th>";
             $table.="<th>Eliminar</th>";
             $table.="</tr>";
+            $table.="</thead>";
+            $table.="<tbody>";
 
             while($row = $result->fetch_array()){
                 $table.="<tr class='fila'>";
@@ -120,6 +122,7 @@ class Proveedor{
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['documento_proveedor']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form></th>";
                 $table.="</tr>";
             }
+            $table.="</tbody>";
             $table.="</table>";
             echo $table;
 

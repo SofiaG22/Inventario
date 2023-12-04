@@ -24,12 +24,12 @@ public static function setShowLess(){
 }
 // trae todas las ventas y las meustra en una tabla
 public static function getSells($conex,$id_store){
-        $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']} LIMIT 0, {$_SESSION['filaSell']} ;");
+
+        $query=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']};");
         $result = mysqli_query($conex,$query);
-        $queryTotal=("SELECT * FROM `venta` WHERE DATE(`fecha`)=CURDATE() and (`id_tienda`) =$id_store and(`id_administrador`)={$_SESSION['idAdmin']};");
-        $resultTotal = mysqli_query($conex,$queryTotal);
         if($result && mysqli_num_rows($result)>0){
-            $table ="<table>";
+            $table ="<table id='sellTable'>";
+            $table.="<thead>";
             $table.="<tr class='headerFila'>" ;
             $table.="<th> ID de Venta </th>";
             $table.="<th> Cliente </th>";
@@ -40,6 +40,10 @@ public static function getSells($conex,$id_store){
             $table.="<th> Fecha </th>";
             $table.="<th> Eliminar</th>";
             $table.="</tr>";
+            $table.="</thead>";
+            $table.="<tbody>";
+
+
 
             while($row =$result->fetch_array()){
                 $table.="<tr class='fila'>";
@@ -54,13 +58,9 @@ public static function getSells($conex,$id_store){
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_venta']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form> </th>";
                 $table.="</tr>";
             }
+            $table.="</tbody>";
+
             $table .="</table>";
-            if(mysqli_num_rows($resultTotal)>$_SESSION['filaSell']){
-                $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMore'>Cargar Más</button> </form>";
-            }
-            if($_SESSION['filaSell']>20){
-                $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLess'>Cargar Menos</button> </form>";
-            }
             echo $table;
         }
         else{

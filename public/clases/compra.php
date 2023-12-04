@@ -20,11 +20,12 @@ class Compra{
     //trae las compras a proveedores
     public static function getBoughts($conex,$id_store){
             //trae compras por 10
-            $query=("SELECT * FROM `compra` WHERE  (`id_tienda`) =$id_store LIMIT 0, {$_SESSION['filaBought']} ;");
+
+            $query=("SELECT * FROM `compra` WHERE (`id_tienda`) =$id_store;");
             $result = mysqli_query($conex,$query);
-           
             if($result && mysqli_num_rows($result)>0){
-                $table ="<table>";
+                $table ="<table id='boughtTable'>";
+                $table.= "<thead>";
                 $table.= "<tr class='headerFila'>";
                 $table.="<th> ID Compra </th>";
                 $table.="<th> Cantidad Comprada</th>";
@@ -33,6 +34,10 @@ class Compra{
                 $table.="<th> Proveedor </th>";
                 $table.="<th> Fecha </th>";
                 $table.="</tr>";
+                $table.="</thead>";
+                $table.="<tbody>";
+
+
 
                 //ARREGLO PARA PODER ITERAR SOBRE CADA UNA DE LAS COMPRAS 
                 while($row =$result->fetch_array()){
@@ -45,18 +50,9 @@ class Compra{
                     $table.="<th> {$row['fecha']} </th>";
                     $table.="</tr>";
                 }
+                $table .="</tbody>";
                 $table .="</table>";
-                 //trae todas las compras
-                $queryTotal=("SELECT * FROM `compra` WHERE (`id_tienda`) =$id_store;");
-                $resultTotal = mysqli_query($conex,$queryTotal);
-                //si son mas de 10 añade boton ver mas
-                if(mysqli_num_rows($resultTotal)> $_SESSION['filaBought']){
-                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMoreBought'>Cargar Más</button> </form>";
-                }
-                //si son mas de 20 añade boton ver menos
-                if($_SESSION['filaBought']>=20){
-                    $table .="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLessBought'>Cargar Menos</button> </form>";
-                }
+
                 echo $table;
             }
             else{

@@ -54,6 +54,7 @@ $_SESSION['filaBought']=10;
     <button type="submit"  class="EditDeleteProduct" value="Ver productos" name ="showProducts"> Ver y editar productos</button>
 </form>
 
+<script src="js/productTable.js"></script>
 <?php
 
 

@@ -96,7 +96,8 @@ public static function getProducts($conex, $store){
 
     try {
         //titulo de los espacios tabla
-        $table="<table >";
+        $table="<table id='productTable' >";
+        $table.="<thead>";
         $table.="<tr class='headerFila'>";
         $table.="<th id='nombretabla'> Nombre</th>";
         $table.="<th> Codigo</th>";
@@ -106,14 +107,17 @@ public static function getProducts($conex, $store){
         $table.="<th> Editar</th>";
         $table.="<th> Eliminar</th>";
         $table.="</tr>";
-        $query=("SELECT * FROM `producto` WHERE (`id_tienda`) =$store LIMIT 0, {$_SESSION['rowProduct']} ;");
-        $result = mysqli_query($conex,$query);
-        
+        $table.="</thead>";
+        $table.="<tbody>";
+
+
+        $query=("SELECT * FROM `producto` WHERE (`id_tienda`) =$store;");
+        $resultTotal = mysqli_query($conex,$query);
         //si hay almenos un producto crea taba
-        if (mysqli_num_rows($result)>0){
+        if (mysqli_num_rows($resultTotal)>0){
 
             //ARREGLO PARA PODER ITERAR SOBRE CADA UNA DE LOS PRODUCTOS 
-            while($row =$result->fetch_array()){
+            while($row =$resultTotal->fetch_array()){
                 $queryPriceBought=("SELECT *  FROM `compra` WHERE id_producto={$row['id_producto']} ORDER BY `fecha` DESC LIMIT 1;");
                 $resultPriceBought =mysqli_query($conex,$queryPriceBought);
                 while($rowl= $resultPriceBought->fetch_array()){
@@ -131,17 +135,9 @@ public static function getProducts($conex, $store){
                 $table.="<th> <form method='post'> <button type='submit' value='Eliminar' name='{$row['id_producto']}'><i class='deleteButton fa-solid fa-rectangle-xmark'></i></button> </form></th>";
                 $table.="</tr>";
             }
-            $table.="<table>";
-            $queryTotal=("SELECT * FROM `producto` WHERE (`id_tienda`) =$store;");
-            $resultTotal = mysqli_query($conex,$queryTotal);
-            //si son mas de 10 añade boton ver mas
-            if(mysqli_num_rows($resultTotal)>$_SESSION['rowProduct']){
-                $table.="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showMore'>Cargar Más</button> </form>";
-            }
-            //si son mas de 20 añade boton ver menos
-            if($_SESSION['rowProduct']>20){
-                $table.="<form method='post'><button type='submit' class='btn btn-primary mx-auto d-block border-0' style='background-color: #58158F;' name='showLess'>Cargar Menos</button> </form>";
-            }
+            $table.="</tbody>";
+            $table.="</table>";
+         
             echo $table;
         }
         else{

@@ -15,6 +15,13 @@ $_SESSION['rowProduct']=10;
         <div class="col-md-6">
 
             <form action="" method="post">
+                
+                <div class="mb-3">
+                    <label for="nameProduct" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nameProduct" name="nameProduct">
+                    <ul id="ulSearch"></ul>
+                </div>
+                
                 <div class="mb-3">
                     <label for="numberProduct" class="form-label">Código</label>
                     <input type="number" class="form-control" id="numberProduct" name="numberProduct">
@@ -38,6 +45,7 @@ $_SESSION['rowProduct']=10;
         </div>
     </div>
 </div>
+<script src="js/searchProduct.js"></script>
 <?php
 include('handlers/sellHandler.php');
 ?>

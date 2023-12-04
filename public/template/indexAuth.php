@@ -30,5 +30,7 @@ include('navbar.php');
 <?php
 include('handlers/indexAuth.php');
 ?>
+
 </body>
+<script src="js/sellTable.js"></script>
 </html>
