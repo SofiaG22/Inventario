@@ -21,11 +21,6 @@ $_SESSION['filaBought']=10;
                 </div>
 
                 <div class="mb-3">
-                    <label for="numberProduct" class="form-label">Código</label>
-                    <input type="number" class="form-control" id="numberProduct" name="numberProduct">
-                </div>
-
-                <div class="mb-3">
                     <label for="priceBought" class="form-label">Precio Compra</label>
             <input type="number" class="form-control" id="priceBought" name="priceBought">
         </div>

@@ -23,7 +23,15 @@ include("../validateSession/validatenTemplate.php")
         </div>
         <div class="mb-3">
             <label for="chargeSign" class="form-label">Cargo</label>
-            <input type="text" class="form-control" id="chargeSign" name="chargeSign">
+            <select name="chargeSign"  class="form-control" id="chargeSign">
+                <option value="Administrador">Administrador</option>
+                <option value="Gerente">Gerente</option>
+                <option value="Cajero">Cajero</option>
+                <option value="Otro">Otro"</option>
+
+
+            </select>
+            
         </div>
         <div class="mb-3">
             <label for="emailSign" class="form-label">Email</label>

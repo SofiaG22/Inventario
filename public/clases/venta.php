@@ -93,7 +93,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                         //verifico si fue exitosa y imprimo factura
                         $id_venta = mysqli_insert_id($conex);
                         //actualiza cantidad unidades producot
-                        Producto::updateProduct($conex,$id_product,$id_product,$row['nombre_producto'],$row['precio_venta'],$row['prcant_existente']-$quantitySell,$id_store,false);
+                        Producto::updateProduct($conex,$id_product,$row['nombre_producto'],$row['precio_venta'],$row['prcant_existente']-$quantitySell,$id_store,false);
                         echo "<script> 
                             Swal.fire({
                                 icon: 'success',
@@ -132,7 +132,7 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
         else{
             echo "<script> Swal.fire({
                 icon: 'error',
-                title: 'No se encontro el id de producto',
+                title: 'Selecciona un producto',
                 });
                 </script>";
         }

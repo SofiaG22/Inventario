@@ -6,19 +6,9 @@ include('clases/proveedor.php');
     //permite seleccionar proveedores existente en el selct
     $result = Proveedor::getProvidersSelect($conex);
     //Controla cuantas filas se muestran en los resultados
-    if(isset($_POST["showMore"])){
-        Producto::setShowMore();
-        Producto::getProducts($conex, $_SESSION['store']);
-    
-    }
-    if(isset($_POST["showLess"])){
-        Producto::setShowLess();
-        Producto::getProducts($conex, $_SESSION['store']);
-    
-    }
 if( isset($_POST['submitProduct'])){
-    if( !empty($_POST['numberProduct']) && !empty($_POST['nameProduct']) && !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
-        $producto =new Producto($_POST['numberProduct'],$_POST['nameProduct'],'y',$_POST['priceProduct'],$_POST['quantityProduct'],$_SESSION['store']);
+    if( !empty($_POST['nameProduct']) && !empty($_POST['priceProduct']) && !empty($_POST['quantityProduct'])&& $_POST['providerId']!='nP' && !empty($_POST['priceBought'])){
+        $producto =new Producto($_POST['nameProduct'],'y',$_POST['priceProduct'],$_POST['quantityProduct'],$_SESSION['store']);
         $producto->setProduct($conex,$_POST['priceBought'],$_POST['providerId']);
     }
     else{
@@ -46,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['showProducts']) && !
         Producto::setProductInfo($conex,$_SESSION['store'],$id);
     }
     elseif($campo =="Actualizar"){
-        Producto::updateProduct($conex,$id,$_POST['editNumberProduct'],$_POST['editNameProduct'],$_POST['editpriceProduct'],$_POST['editQuantityProduct'],$_SESSION['store'],true);
+        Producto::updateProduct($conex,$id,$_POST['editNameProduct'],$_POST['editpriceProduct'],$_POST['editQuantityProduct'],$_SESSION['store'],true);
     }
     elseif($campo =="Eliminar"){
         Producto::deleteProduct($conex, $id);

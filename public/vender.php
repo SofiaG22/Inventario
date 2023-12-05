@@ -17,16 +17,11 @@ $_SESSION['rowProduct']=10;
             <form action="" method="post">
                 
                 <div class="mb-3">
-                    <label for="nameProduct" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nameProduct" name="nameProduct">
+                    <label for="-1" autocomplete="off" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nameProduct" name="-1">
                     <ul id="ulSearch"></ul>
                 </div>
                 
-                <div class="mb-3">
-                    <label for="numberProduct" class="form-label">Código</label>
-                    <input type="number" class="form-control" id="numberProduct" name="numberProduct">
-                </div>
-
                 <div class="mb-3">
                     <label for="quantitySell" class="form-label">Cantidad</label>
                     <input type="number" class="form-control" id="quantitySell" name="quantitySell">

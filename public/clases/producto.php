@@ -1,15 +1,13 @@
 <?php
 
 class Producto{
-    private $id_product;
     private $name_product ;
     private $descriptionProduct ;
     private $priceProduct;
     private $quantityProduct;
 
 
-    public function __construct($id_product, $name_product,$description_product,$price_product,$quantity_product,$id_store) {
-        $this->id_product = $id_product;
+    public function __construct($name_product,$description_product,$price_product,$quantity_product,$id_store) {
         $this->name_product = $name_product;
         $this->description_product = $description_product;
         $this->price_product = $price_product;
@@ -19,18 +17,19 @@ class Producto{
     //crea productos
     public function setProduct($conex,$precio_provider,$id_provider) {
         try{
-            //inserta producto
-            $query=("INSERT INTO `producto`(`id_producto`, `nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ({$this->id_product},'{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
+            // inserta producto
+            $query=("INSERT INTO `producto`(`nombre_producto`, `precio_venta`, `prcant_existente`, `id_tienda`) VALUES ('{$this->name_product}',{$this->price_product},{$this->quantity_product},{$this->id_store} )");
             $result =mysqli_query($conex,$query);
-            //inserta a compras
-            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,{$this->id_product},$id_provider,{$_SESSION['store']})");
+            // inserta a compras
+            $id_product = mysqli_insert_id($conex);
+            $queryBought=("INSERT INTO `compra`( `cant_compra`, `precio_proveedor`, `id_producto`, `id_proveedor`,`id_tienda`) VALUES ({$this->quantity_product },$precio_provider,$id_product,$id_provider,{$_SESSION['store']})");
             $resultBought=mysqli_query($conex,$queryBought);
-            //si se inserta da alerta de creado cin exito
+            // si se inserta da alerta de creado cin exito
             if ($result && mysqli_affected_rows($conex)>0){
                 echo "<script>
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Producto {$this->name_product} creado con  exito'
+                                title: 'Producto -{$this->name_product}- creado con  exito'
                           });
                                  </script>";   
             }
@@ -38,7 +37,7 @@ class Producto{
         }
         // si no se inserta da erro
         catch(Exception $e){
-            $queryProduct=("SELECT * FROM `producto` WHERE id_producto={$this->id_product} and id_tienda={$this->id_store} ");
+            $queryProduct=("SELECT * FROM `producto` WHERE id_producto=0 and id_tienda={$this->id_store} ");
             //verifica si el producto ya esta en la tienda y da la opcion de añadir mas unidades
             $result =mysqli_query($conex,$queryProduct);
             if(mysqli_num_rows($result)>0){
@@ -63,7 +62,7 @@ class Producto{
                 echo "<script>
                 Swal.fire({
                 icon: 'error',
-                title: 'El Codigo {$this->id_product} no esta disponible ',
+                title: 'El Codigo  no esta disponible ',
                 text:'prueba otro codigo'
             });
             </script>";  
@@ -79,17 +78,6 @@ class Producto{
             $resultBought=mysqli_query($conex,$queryBought);            
         }
 
-        public static function setShowMore(){
-            $_SESSION['rowProduct']+=10;
-        }
-        //quita 10 filas al resultado 
-        public static function setShowLess(){
-            $_SESSION['rowProduct']-=10;
-            if($_SESSION['rowProduct']<10){
-            $_SESSION['rowProduct']=10;
-        
-            }
-        }
         //trae todos los prodcutos y los muestar en una tabla
 public static function getProducts($conex, $store){
 
@@ -185,10 +173,6 @@ public static function setProductInfo($conex,$id_store,$id_product){
                         <input type='text' class='form-control' name='editNameProduct' value='{$row['nombre_producto']}'>
                     </div>
                     <div class='form-group'>
-                        <label for='editNumberProduct'>Código</label>
-                        <input type='number' class='form-control' name='editNumberProduct' value='{$row['id_producto']}'>
-                    </div>
-                    <div class='form-group'>
                         <label for='editDescripcionProduct'>Descripción</label>
                         <input type='text' class='form-control' name='editDescripcionProduct' value='{$row['nombre_producto']}'>
                     </div>
@@ -211,9 +195,9 @@ public static function setProductInfo($conex,$id_store,$id_product){
 
 }
 //actualizar producto con los valores dados
-public static function updateProduct($conex,$Oldid_Product,$id_ProductEdit,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){
+public static function updateProduct($conex,$Oldid_Product,$nombre_producto,$precio_venta,$cantidad,$tienda,$showMessagge){
         try{
-            $query = "UPDATE `producto` SET `id_producto`=$id_ProductEdit, `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
+            $query = "UPDATE `producto` SET  `nombre_producto`='$nombre_producto', `precio_venta`=$precio_venta, `prcant_existente`=$cantidad, `id_tienda`=$tienda WHERE `id_producto`=$Oldid_Product";
 
             $result =mysqli_query($conex,$query);
             if ($result && $showMessagge){
