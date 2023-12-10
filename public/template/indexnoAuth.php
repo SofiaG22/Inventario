@@ -24,6 +24,7 @@
 
     <?php
     include("Auth/login.php");
+   
     ?>
 </form>
 

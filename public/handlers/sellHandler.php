@@ -14,7 +14,7 @@ if (isset($_POST['submitSell'])){
         while($row= $result->fetch_array()){
             $name_admin=$row['nombre_admin'];
         }
-        Venta::setSell($conex,$_SESSION['store'], $valor ,$_POST['quantitySell'],$_POST['idClient'],$name_admin);
+        Venta::setSell($conex,$_SESSION['store'], $valor ,$_POST['quantitySell'],$_POST['idClient'],$name_admin, $_POST['emailCustomer']);
     }
 }
 

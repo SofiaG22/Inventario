@@ -1,5 +1,8 @@
 
 <?php
+
+include("mailer/mail.php");
+
 class Administrador{
     private $name_admin ;
     private $charge ;
@@ -148,7 +151,12 @@ class Administrador{
         //se hace la cunsulta para verificar usuario y contraseña
         $query=("SELECT * FROM administrador WHERE usuario ='$email' and contraseña='$password'");
         $result =mysqli_query($conex,$query);
+
+        include("mailer/date.php");
+
+
         if (mysqli_num_rows($result)>0){
+            sendMail($email, "Iniciaste sesion correctamente","<b>Inicias sesion en nuestro sistema de inventario</b> </br> Hora:{$currentDate}");
             //si es exitosa crea o inicia sesion y en la sesion guardamos datos importantes (id_tienda)
             while($row =$result->fetch_array()){
                 session_start();

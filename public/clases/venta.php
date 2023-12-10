@@ -1,6 +1,7 @@
 <?php
 include("clases/producto.php");
 include("clases/cliente.php");
+include("mailer/mail.php");
 
 class Venta{
     private $cant_venta ;
@@ -74,7 +75,7 @@ public static function getSells($conex,$id_store){
 }
     
 
-public static function setSell($conex,$id_store,$id_product,$quantitySell,$idClient,$name_admin){
+public static function setSell($conex,$id_store,$id_product,$quantitySell,$idClient,$name_admin,$emailCustomer){
     //verifico si existe producto 
     $result = Producto::getProduct($conex,$id_store,$id_product);
     if($result){
@@ -94,6 +95,13 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                         $id_venta = mysqli_insert_id($conex);
                         //actualiza cantidad unidades producot
                         Producto::updateProduct($conex,$id_product,$row['nombre_producto'],$row['precio_venta'],$row['prcant_existente']-$quantitySell,$id_store,false);
+                        
+                        $htmlSend="<b> ID venta : </b> {$id_venta} <br> 
+                        <b> ID cliente :</b> {$idClient}<br>
+                        <b>  Producto : </b> {$row['nombre_producto']} * $quantitySell <br>
+                        <b> Total : COP </b>$".$total."<br>
+                        <b>Encargado:</b> {$name_admin} <br>";
+                        sendMail($emailCustomer,"Factura de compra",$htmlSend);
                         echo "<script> 
                             Swal.fire({
                                 icon: 'success',

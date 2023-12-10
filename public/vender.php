@@ -33,6 +33,10 @@ $_SESSION['rowProduct']=10;
                     <label for="idCliente" class="form-label">ID cliente</label>
                     <input type="number" class="form-control" id="idCliente" name="idClient">
                 </div>
+                <div class="mb-3">
+                    <label for="emailCustomer" class="form-label">Email Cliente</label>
+                    <input type="email" class="form-control" id="emailCustomer" name="emailCustomer">
+                </div>
 
 
                 <button type="submit" class="btn btn-primary mx-auto d-block border-0" style="background-color: #58158F;" name="submitSell">Añadir</button>

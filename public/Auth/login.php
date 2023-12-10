@@ -2,6 +2,7 @@
     //incluye archivos
     include("conexion/conexion.php");
     include("clases/administrador.php");
+
         if(isset($_POST["submitLogin"])){
             $email= trim($_POST["emailLogin"]);
             $password=$_POST["passwordLogin"];
