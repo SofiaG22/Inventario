@@ -19,7 +19,7 @@ $(document).ready( function () {
                 $('#ulSearch').empty()
                 if (response.length>0){
                     response.forEach(row => {
-                        let li = $('<li>',{"class":"liSearch"}).text(`${row.nombre_producto} - (${row.id_producto})`)
+                        let li = $('<li>',{"class":"liSearch"}).text(`${row.nombre_producto} - (${row.prcant_existente} unidades)`)
                         $(li).on("click",()=>{
                             $('#nameProduct').val(li.text())
                             
