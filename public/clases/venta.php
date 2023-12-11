@@ -96,7 +96,9 @@ public static function setSell($conex,$id_store,$id_product,$quantitySell,$idCli
                         //actualiza cantidad unidades producot
                         Producto::updateProduct($conex,$id_product,$row['nombre_producto'],$row['precio_venta'],$row['prcant_existente']-$quantitySell,$id_store,false);
                         
-                        $htmlSend="<b> ID venta : </b> {$id_venta} <br> 
+                        $htmlSend="<b> Hola!  gracias por tu compra</b></br>
+                        <p>A continuación te dejamos la factura</p> </br>
+                        <b> ID venta : </b> {$id_venta} <br> 
                         <b> ID cliente :</b> {$idClient}<br>
                         <b>  Producto : </b> {$row['nombre_producto']} * $quantitySell <br>
                         <b> Total : COP </b>$".$total."<br>

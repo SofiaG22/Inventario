@@ -1,7 +1,6 @@
 
 <?php
 
-include("mailer/mail.php");
 
 class Administrador{
     private $name_admin ;
@@ -70,6 +69,8 @@ class Administrador{
         </script>";
     }
     public  function addAdmin($conex){
+        include("../mailer/mail.php");
+
         //verifica si existe usuario
         $query_user=("SELECT * FROM administrador WHERE usuario ='{$this->user}'");
         $result_user= mysqli_query($conex,$query_user);
@@ -91,6 +92,8 @@ class Administrador{
                 $query=("INSERT INTO `administrador`( `nombre_admin`, `cargo`, `usuario`, `contraseña`, `id_tienda`) VALUES ('{$this->name_admin}','{$this->charge}','{$this->user}','{$this->password}',{$this->id_store})");   
                 $result= mysqli_query($conex,$query);
                 if($result){
+                    sendMail($this->user, "Bienvenido",
+                     "<b>Hola {$this->name_admin},</br> Gracias por registrarte en nuestro sistema!</b></br><p>Ahora puedes iniciar sesion con tus credenciales</p>");
                     echo "<script>
                     Swal.fire({
                         icon: 'success',
@@ -128,14 +131,24 @@ class Administrador{
         }
     }
     public static function deleteAdmin($conex){
+        include("mailer/mail.php");
+
         //crea contraseña y usuario aleatorio 
         $newPassword=md5(mt_rand(10000, 100000));
         $newUser=md5(mt_rand(10000, 100000));
         //asigna los valores aleatorios a la cuenta que se elimina para no poder volver a ingresar
+        $queryEmail=("SELECT `usuario` , `nombre_admin` FROM `administrador` WHERE id_administrador ={$_SESSION['idAdmin']}");
+        $resultEmail=mysqli_query($conex,$queryEmail);
         $query =("UPDATE `administrador` SET `contraseña`='$newPassword',`usuario`='$newUser' WHERE id_administrador ={$_SESSION['idAdmin']} ");
         $result = mysqli_query($conex,$query);
+
         if ($result){
+
             //elimina y cierra sesion, redirige inicio
+            while($row=$resultEmail->fetch_array()){
+
+                sendMail($row['usuario'], "Hasta pronto","<b>Nos vemos {$row['nombre_admin']}</b><br><p>Tu cuenta sera suspendida y no podras volvera  ingresar</p>");
+            }
             session_start();
             session_regenerate_id(true);
             session_destroy();
@@ -146,6 +159,8 @@ class Administrador{
     }
 
     public static function logIn($conex,$email,$password){
+        include("mailer/mail.php");
+
         //Se recibe la contraseña y se encripta con md5
         $password= md5($password);
         //se hace la cunsulta para verificar usuario y contraseña
